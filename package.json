@@ -1,0 +1,41 @@
+{
+  "name": "contacts-api",
+  "version": "1.0.0",
+  "description": "A simple RESTful API for managing contacts using Node.js, Express, and MongoDB.",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "swagger": "node src/swagger/swagger.js",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.js"
+  },
+  "keywords": [],
+  "author": "Baron T.",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.2",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2",
+    "eslint": "^10.3.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrb2002/cse341-project1-contacts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nrb2002/cse341-project1-contacts/issues"
+  },
+  "homepage": "https://github.com/nrb2002/cse341-project1-contacts#readme"
+}
