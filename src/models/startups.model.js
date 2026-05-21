@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const contactSchema = new mongoose.Schema({
+const startupSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
@@ -27,4 +27,4 @@ const contactSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Contact", contactSchema);
+module.exports = mongoose.model("Startup", startupSchema);

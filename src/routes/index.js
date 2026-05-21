@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 router.get("/", (req, res) => {
   //#swagger.tags=['Home Page']
-  res.send("Welcome to our Contacts API!");
+  res.send("Welcome to FountTech API!");
 });
 
 module.exports = router;

@@ -1,15 +1,16 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contacts API Documentation",
+    "title": "FountTech API Documentation",
     "version": "1.0.0",
-    "description": "This is an API for storing and retrieving information about contacts. These contacts are to be stored in a MongoDB database and all interaction happen through the API. The API can be used by any frontend.",
+    "description": "This is an API for storing and retrieving information about startups. These business data are to be stored in a MongoDB database and all interaction happen through the API. The API can be used by any frontend.",
     "author": "Baron T.",
-    "Last update": "2024-06-01"
+    "Last update": "2026-05-21"
   },
-  "host": "cse341-project1-contacts-api.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
@@ -26,13 +27,13 @@
         }
       }
     },
-    "/contacts/": {
+    "/startups/": {
       "get": {
         "tags": [
-          "Contacts CRUD Operations"
+          "startups CRUD Operations"
         ],
-        "summary": "Get All Contacts",
-        "description": "Pull all contacts from the database. ",
+        "summary": "Get All startups",
+        "description": "Pull all startups from the database. ",
         "responses": {
           "200": {
             "description": "OK"
@@ -47,15 +48,15 @@
       },
       "post": {
         "tags": [
-          "Contacts CRUD Operations"
+          "startups CRUD Operations"
         ],
-        "summary": "Create New Contact",
-        "description": "Insert new contact in the database. ",
+        "summary": "Create New Startup",
+        "description": "Insert new startup in the database. ",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "Enter New Contact",
+            "description": "Enter New startup",
             "required": true,
             "schema": {
               "type": "object",
@@ -94,20 +95,20 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/startups/{id}": {
       "get": {
         "tags": [
-          "Contacts CRUD Operations"
+          "startups CRUD Operations"
         ],
-        "summary": "Get Single Contact",
-        "description": "Pull one contact by ID from the database. ",
+        "summary": "Get single startup",
+        "description": "Pull one startup by ID from the database. ",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Contact ID"
+            "description": "startup ID"
           }
         ],
         "responses": {
@@ -124,22 +125,22 @@
       },
       "put": {
         "tags": [
-          "Contacts CRUD Operations"
+          "Startups CRUD Operations"
         ],
-        "summary": "Update Contact Info",
-        "description": "Edit a specific contact and save update in database. ",
+        "summary": "Update Startup Info",
+        "description": "Edit a specific startup and save update in database. ",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Contact ID"
+            "description": "Startup ID"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Updated contact fields",
+            "description": "Updated startup fields",
             "required": true,
             "schema": {
               "type": "object",
@@ -179,17 +180,17 @@
       },
       "delete": {
         "tags": [
-          "Contacts CRUD Operations"
+          "startups CRUD Operations"
         ],
-        "summary": "Delete Contact",
-        "description": "Delete selected contact from the database.",
+        "summary": "Delete startup",
+        "description": "Delete selected startup from the database.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Contact ID"
+            "description": "startup ID"
           }
         ],
         "responses": {

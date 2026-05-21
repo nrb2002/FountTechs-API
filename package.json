@@ -1,7 +1,7 @@
 {
-  "name": "contacts-api",
+  "name": "founttech-api",
   "version": "1.0.0",
-  "description": "A simple RESTful API for managing contacts using Node.js, Express, and MongoDB.",
+  "description": "A simple RESTful API exposing many resources, including startups data, user authentication, and more.",
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nrb2002/cse341-project1-contacts.git"
+    "url": "git+https://github.com/nrb2002/founttech-api.git"
   },
   "bugs": {
-    "url": "https://github.com/nrb2002/cse341-project1-contacts/issues"
+    "url": "https://github.com/nrb2002/founttech-api/issues"
   },
-  "homepage": "https://github.com/nrb2002/cse341-project1-contacts#readme"
+  "homepage": "https://github.com/nrb2002/founttech-api#readme"
 }

@@ -4,10 +4,10 @@ const swaggerAutogen = require("swagger-autogen")(); //import swagger package
 
 const doc = {
   info: {
-    title: "Contacts API Documentation",
+    title: "FountTech API Documentation",
     version: "1.0.0",
     description:
-      "This is an API for storing and retrieving information about contacts. These contacts are to be stored in a MongoDB database and all interaction happen through the API. The API can be used by any frontend.",
+      "This is an API for storing and retrieving information about startups. These business data are to be stored in a MongoDB database and all interaction happen through the API. The API can be used by any frontend.",
     author: "Baron T.",
     "Last update": "2024-06-01",
   },
@@ -19,7 +19,7 @@ const doc = {
   //For production
   host:
     process.env.NODE_ENV === "production"
-      ? "cse341-project1-contacts-api.onrender.com"
+      ? "https://founttech-api.onrender.com"
       : "localhost:8080",
   schemes: ["http", "https"],
 
