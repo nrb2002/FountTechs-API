@@ -2,7 +2,7 @@ const startupsService = require("../services/startups.service");
 
 // GET all startups
 const getAllStartups = async (req, res) => {
-  //#swagger.tags=["startups CRUD Operations"]
+  //#swagger.tags=["Startups CRUD Operations"]
   //#swagger.summary="Get All startups"
   //#swagger.description="Pull all startups from the database. "
   try {
@@ -14,6 +14,10 @@ const getAllStartups = async (req, res) => {
 
     //Return the startups
     res.status(200).json(startups);
+    // #swagger.responses[200] = {
+    //  description: 'Startup retrieved successfully'
+    // }
+
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -23,7 +27,7 @@ const getAllStartups = async (req, res) => {
 
 // GET single startup
 const getSingleStartup = async (req, res) => {
-  //#swagger.tags=["startups CRUD Operations"]
+  //#swagger.tags=["Startups CRUD Operations"]
   //#swagger.summary="Get single startup"
   //#swagger.description="Pull one startup by ID from the database. "
   /* #swagger.parameters['id'] = {
@@ -37,6 +41,9 @@ const getSingleStartup = async (req, res) => {
 
     if (!startup) {
       return res.status(404).json({
+        // #swagger.responses[404] = {
+        //   description: 'Startup not found'
+        // }
         message: "Startup not found!",
       });
     }
@@ -44,6 +51,9 @@ const getSingleStartup = async (req, res) => {
     res.status(200).json(startup);
   } catch (error) {
     res.status(500).json({
+      // #swagger.responses[500] = {
+      //   description: 'Internal server error'
+      // }
       message: error.message,
     });
   }
@@ -51,25 +61,46 @@ const getSingleStartup = async (req, res) => {
 
 // CREATE startup
 const createStartup = async (req, res) => {
-  //#swagger.tags=["startups CRUD Operations"]
+  //#swagger.tags=["Startups CRUD Operations"]
   //#swagger.summary="Create New Startup"
   //#swagger.description="Insert new startup in the database. "
+  
   /* #swagger.parameters["body"] = {
     in: "body",
-    description: "Enter New startup",
+    description: "New startup data",
     required: true,
-    schema: { 
-      firstName: "John",
-      lastName: "Doe",
-      email: "john@domain.com",
-      favoriteColor: "color",
-      birthday: "Jan 1" 
+    schema: {
+      name: "KongoTech",
+      description: "FinTech startup providing digital payment solutions",
+      industry: "FinTech",
+      foundedYear: 2022,
+      founders: ["Baron Mobs"],
+      website: "https://kongotech.com",
+      email: "info@kongotech.com",
+      phone: "+243810000000",
+      location: {
+        city: "Kinshasa",
+        province: "Kinshasa",
+        country: "DR Congo"
+      },
+      products: ["Mobile Wallet"],
+      services: ["Payment Processing"],
+      employees: 18,
+      startupStage: "Growth",
+      fundingStage: "Seed",
+      turnover: [
+        {
+          year: 2024,
+          amount: 65000
+        }
+      ]
     }
-  } */
+} */
   try {
     const newStartup = await startupsService.createStartup(req.body);
 
     res.status(201).json(newStartup);
+
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -92,23 +123,42 @@ const updateStartup = async (req, res) => {
 
   /* #swagger.parameters["body"] = {
     in: "body",
-    description: "Updated startup fields",
+    description: "Update startup data",
     required: true,
     schema: {
-      firstName: "Jane",
-      lastName: "Doe",
-      email: "jane@domain.com",
-      favoriteColor: "blue",
-      birthday: "Feb 2"
+      name: "KongoTech",
+      description: "FinTech startup providing digital payment solutions",
+      industry: "FinTech",
+      foundedYear: 2022,
+      founders: ["Baron Mobs"],
+      website: "https://kongotech.com",
+      email: "info@kongotech.com",
+      phone: "+243810000000",
+      location: {
+        city: "Kinshasa",
+        province: "Kinshasa",
+        country: "DR Congo"
+      },
+      products: ["Mobile Wallet"],
+      services: ["Payment Processing"],
+      employees: 18,
+      startupStage: "Growth",
+      fundingStage: "Seed",
+      turnover: [
+        {
+          year: 2024,
+          amount: 65000
+        }
+      ]
     }
 } */
   try {
-    const updateStartup = await startupsService.updateStartup(
+    const updatedStartup = await startupsService.updateStartup(
       req.params.id,
       req.body,
     );
 
-    res.status(200).json(updateStartup);
+    res.status(200).json(updatedStartup);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -118,9 +168,10 @@ const updateStartup = async (req, res) => {
 
 // DELETE startup
 const deleteStartup = async (req, res) => {
-  //#swagger.tags=["startups CRUD Operations"]
+  //#swagger.tags=["Startups CRUD Operations"]
   //#swagger.summary="Delete startup"
   //#swagger.description="Delete selected startup from the database."
+  
   /* #swagger.parameters['id'] = {
         in: 'path',
         description: 'startup ID',
@@ -131,7 +182,7 @@ const deleteStartup = async (req, res) => {
     await startupsService.deleteStartup(req.params.id);
 
     res.status(200).json({
-      message: "startup deleted successfully!",
+      message: "Startup deleted successfully!",
     });
   } catch (error) {
     res.status(500).json({

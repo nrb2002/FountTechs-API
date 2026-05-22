@@ -3,9 +3,9 @@
   "info": {
     "title": "FountTech API Documentation",
     "version": "1.0.0",
-    "description": "This is an API for storing and retrieving information about startups. These business data are to be stored in a MongoDB database and all interaction happen through the API. The API can be used by any frontend.",
+    "description": "This is an API for storing and retrieving information about local startups in Kinshasa. These businesses' data are accessible through the API which can be used by any frontend. The API is built using Node.js and Express, and the documentation is generated using Swagger. The API provides endpoints for creating, reading, updating, and deleting startup information, as well as searching for startups based on various criteria. The documentation includes details about each endpoint, including the request parameters, response format, and example requests and responses. ",
     "author": "Baron T.",
-    "Last update": "2026-05-21"
+    "last update": "2026-05-22"
   },
   "host": "localhost:8080",
   "basePath": "/",
@@ -30,16 +30,140 @@
     "/startups/": {
       "get": {
         "tags": [
-          "startups CRUD Operations"
+          "Startups CRUD Operations"
         ],
         "summary": "Get All startups",
         "description": "Pull all startups from the database. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "startup ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update startup data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "KongoTech"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "FinTech startup providing digital payment solutions"
+                },
+                "industry": {
+                  "type": "string",
+                  "example": "FinTech"
+                },
+                "foundedYear": {
+                  "type": "number",
+                  "example": 2022
+                },
+                "founders": {
+                  "type": "array",
+                  "example": [
+                    "Baron Mobs"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://kongotech.com"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "info@kongotech.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "+243810000000"
+                },
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "province": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "DR Congo"
+                    }
+                  }
+                },
+                "products": {
+                  "type": "array",
+                  "example": [
+                    "Mobile Wallet"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "services": {
+                  "type": "array",
+                  "example": [
+                    "Payment Processing"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "employees": {
+                  "type": "number",
+                  "example": 18
+                },
+                "startupStage": {
+                  "type": "string",
+                  "example": "Growth"
+                },
+                "fundingStage": {
+                  "type": "string",
+                  "example": "Seed"
+                },
+                "turnover": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number",
+                        "example": 2024
+                      },
+                      "amount": {
+                        "type": "number",
+                        "example": 65000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
+          "201": {
+            "description": "Created"
+          },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found",
+            "message": "Startup not found!"
           },
           "500": {
             "description": "Internal Server Error"
@@ -48,7 +172,7 @@
       },
       "post": {
         "tags": [
-          "startups CRUD Operations"
+          "Startups CRUD Operations"
         ],
         "summary": "Create New Startup",
         "description": "Insert new startup in the database. ",
@@ -56,30 +180,110 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Enter New startup",
+            "description": "New startup data",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "type": "string",
-                  "example": "John"
+                  "example": "KongoTech"
                 },
-                "lastName": {
+                "description": {
                   "type": "string",
-                  "example": "Doe"
+                  "example": "FinTech startup providing digital payment solutions"
+                },
+                "industry": {
+                  "type": "string",
+                  "example": "FinTech"
+                },
+                "foundedYear": {
+                  "type": "number",
+                  "example": 2022
+                },
+                "founders": {
+                  "type": "array",
+                  "example": [
+                    "Baron Mobs"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://kongotech.com"
                 },
                 "email": {
                   "type": "string",
-                  "example": "john@domain.com"
+                  "example": "info@kongotech.com"
                 },
-                "favoriteColor": {
+                "phone": {
                   "type": "string",
-                  "example": "color"
+                  "example": "+243810000000"
                 },
-                "birthday": {
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "province": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "DR Congo"
+                    }
+                  }
+                },
+                "products": {
+                  "type": "array",
+                  "example": [
+                    "Mobile Wallet"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "services": {
+                  "type": "array",
+                  "example": [
+                    "Payment Processing"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "employees": {
+                  "type": "number",
+                  "example": 18
+                },
+                "startupStage": {
                   "type": "string",
-                  "example": "Jan 1"
+                  "example": "Growth"
+                },
+                "fundingStage": {
+                  "type": "string",
+                  "example": "Seed"
+                },
+                "turnover": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number",
+                        "example": 2024
+                      },
+                      "amount": {
+                        "type": "number",
+                        "example": 65000
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -98,7 +302,7 @@
     "/startups/{id}": {
       "get": {
         "tags": [
-          "startups CRUD Operations"
+          "Startups CRUD Operations"
         ],
         "summary": "Get single startup",
         "description": "Pull one startup by ID from the database. ",
@@ -109,14 +313,129 @@
             "required": true,
             "type": "string",
             "description": "startup ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update startup data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "KongoTech"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "FinTech startup providing digital payment solutions"
+                },
+                "industry": {
+                  "type": "string",
+                  "example": "FinTech"
+                },
+                "foundedYear": {
+                  "type": "number",
+                  "example": 2022
+                },
+                "founders": {
+                  "type": "array",
+                  "example": [
+                    "Baron Mobs"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://kongotech.com"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "info@kongotech.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "+243810000000"
+                },
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "province": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "DR Congo"
+                    }
+                  }
+                },
+                "products": {
+                  "type": "array",
+                  "example": [
+                    "Mobile Wallet"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "services": {
+                  "type": "array",
+                  "example": [
+                    "Payment Processing"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "employees": {
+                  "type": "number",
+                  "example": 18
+                },
+                "startupStage": {
+                  "type": "string",
+                  "example": "Growth"
+                },
+                "fundingStage": {
+                  "type": "string",
+                  "example": "Seed"
+                },
+                "turnover": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number",
+                        "example": 2024
+                      },
+                      "amount": {
+                        "type": "number",
+                        "example": 65000
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
+          "201": {
+            "description": "Created"
+          },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found",
+            "message": "Startup not found!"
           },
           "500": {
             "description": "Internal Server Error"
@@ -140,30 +459,110 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Updated startup fields",
+            "description": "Update startup data",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "type": "string",
-                  "example": "Jane"
+                  "example": "KongoTech"
                 },
-                "lastName": {
+                "description": {
                   "type": "string",
-                  "example": "Doe"
+                  "example": "FinTech startup providing digital payment solutions"
+                },
+                "industry": {
+                  "type": "string",
+                  "example": "FinTech"
+                },
+                "foundedYear": {
+                  "type": "number",
+                  "example": 2022
+                },
+                "founders": {
+                  "type": "array",
+                  "example": [
+                    "Baron Mobs"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://kongotech.com"
                 },
                 "email": {
                   "type": "string",
-                  "example": "jane@domain.com"
+                  "example": "info@kongotech.com"
                 },
-                "favoriteColor": {
+                "phone": {
                   "type": "string",
-                  "example": "blue"
+                  "example": "+243810000000"
                 },
-                "birthday": {
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "province": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "DR Congo"
+                    }
+                  }
+                },
+                "products": {
+                  "type": "array",
+                  "example": [
+                    "Mobile Wallet"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "services": {
+                  "type": "array",
+                  "example": [
+                    "Payment Processing"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "employees": {
+                  "type": "number",
+                  "example": 18
+                },
+                "startupStage": {
                   "type": "string",
-                  "example": "Feb 2"
+                  "example": "Growth"
+                },
+                "fundingStage": {
+                  "type": "string",
+                  "example": "Seed"
+                },
+                "turnover": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "type": "number",
+                        "example": 2024
+                      },
+                      "amount": {
+                        "type": "number",
+                        "example": 65000
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -180,7 +579,7 @@
       },
       "delete": {
         "tags": [
-          "startups CRUD Operations"
+          "Startups CRUD Operations"
         ],
         "summary": "Delete startup",
         "description": "Delete selected startup from the database.",
