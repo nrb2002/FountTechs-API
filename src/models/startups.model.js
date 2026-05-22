@@ -40,6 +40,7 @@ const startupSchema = new mongoose.Schema({
   location: {
     ward: String,
     stake: String,
+    commune: String,
     city: String,
     province: String,
     country: String

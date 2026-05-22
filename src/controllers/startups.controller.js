@@ -79,6 +79,9 @@ const createStartup = async (req, res) => {
       email: "info@kongotech.com",
       phone: "+243810000000",
       location: {
+        ward: "Ngiri-Ngiri",
+        stake: "Kinshasa",
+        commune: "Ngiri-Ngiri",
         city: "Kinshasa",
         province: "Kinshasa",
         country: "DR Congo"
