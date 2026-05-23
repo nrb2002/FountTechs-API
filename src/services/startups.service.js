@@ -17,7 +17,10 @@ const createStartup = async (startupData) => {
 
 // Update Startup
 const updateStartup = async (id, updatedData) => {
-  return await Startup.findByIdAndUpdate(id, updatedData, { new: true });
+  return await Startup.findByIdAndUpdate(id, updatedData, {
+    new: true,
+    runValidators: true,
+  });
 };
 
 // Delete Startup

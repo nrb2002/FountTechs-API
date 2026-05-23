@@ -30,151 +30,21 @@
     "/startups/": {
       "get": {
         "tags": [
-          "Startups CRUD Operations"
+          "Startups Endpoints"
         ],
-        "summary": "Get All startups",
+        "summary": "Get all startups",
         "description": "Pull all startups from the database. ",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "startup ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Update startup data",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "KongoTech"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "FinTech startup providing digital payment solutions"
-                },
-                "industry": {
-                  "type": "string",
-                  "example": "FinTech"
-                },
-                "foundedYear": {
-                  "type": "number",
-                  "example": 2022
-                },
-                "founders": {
-                  "type": "array",
-                  "example": [
-                    "Baron Mobs"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "website": {
-                  "type": "string",
-                  "example": "https://kongotech.com"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "info@kongotech.com"
-                },
-                "phone": {
-                  "type": "string",
-                  "example": "+243810000000"
-                },
-                "location": {
-                  "type": "object",
-                  "properties": {
-                    "city": {
-                      "type": "string",
-                      "example": "Kinshasa"
-                    },
-                    "province": {
-                      "type": "string",
-                      "example": "Kinshasa"
-                    },
-                    "country": {
-                      "type": "string",
-                      "example": "DR Congo"
-                    }
-                  }
-                },
-                "products": {
-                  "type": "array",
-                  "example": [
-                    "Mobile Wallet"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "services": {
-                  "type": "array",
-                  "example": [
-                    "Payment Processing"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "employees": {
-                  "type": "number",
-                  "example": 18
-                },
-                "startupStage": {
-                  "type": "string",
-                  "example": "Growth"
-                },
-                "fundingStage": {
-                  "type": "string",
-                  "example": "Seed"
-                },
-                "turnover": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "year": {
-                        "type": "number",
-                        "example": 2024
-                      },
-                      "amount": {
-                        "type": "number",
-                        "example": 65000
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "201": {
-            "description": "Created"
-          },
-          "404": {
-            "description": "Not Found",
-            "message": "Startup not found!"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
       "post": {
         "tags": [
-          "Startups CRUD Operations"
+          "Startups Endpoints"
         ],
-        "summary": "Create New Startup",
+        "summary": "Create a new startup",
         "description": "Insert new startup in the database. ",
         "parameters": [
           {
@@ -225,6 +95,18 @@
                 "location": {
                   "type": "object",
                   "properties": {
+                    "ward": {
+                      "type": "string",
+                      "example": "Ngiri-Ngiri"
+                    },
+                    "stake": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "commune": {
+                      "type": "string",
+                      "example": "Ngiri-Ngiri"
+                    },
                     "city": {
                       "type": "string",
                       "example": "Kinshasa"
@@ -293,8 +175,8 @@
           "201": {
             "description": "Created"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -302,7 +184,7 @@
     "/startups/{id}": {
       "get": {
         "tags": [
-          "Startups CRUD Operations"
+          "Startups Endpoints"
         ],
         "summary": "Get single startup",
         "description": "Pull one startup by ID from the database. ",
@@ -313,140 +195,25 @@
             "required": true,
             "type": "string",
             "description": "startup ID"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Update startup data",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "KongoTech"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "FinTech startup providing digital payment solutions"
-                },
-                "industry": {
-                  "type": "string",
-                  "example": "FinTech"
-                },
-                "foundedYear": {
-                  "type": "number",
-                  "example": 2022
-                },
-                "founders": {
-                  "type": "array",
-                  "example": [
-                    "Baron Mobs"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "website": {
-                  "type": "string",
-                  "example": "https://kongotech.com"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "info@kongotech.com"
-                },
-                "phone": {
-                  "type": "string",
-                  "example": "+243810000000"
-                },
-                "location": {
-                  "type": "object",
-                  "properties": {
-                    "city": {
-                      "type": "string",
-                      "example": "Kinshasa"
-                    },
-                    "province": {
-                      "type": "string",
-                      "example": "Kinshasa"
-                    },
-                    "country": {
-                      "type": "string",
-                      "example": "DR Congo"
-                    }
-                  }
-                },
-                "products": {
-                  "type": "array",
-                  "example": [
-                    "Mobile Wallet"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "services": {
-                  "type": "array",
-                  "example": [
-                    "Payment Processing"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "employees": {
-                  "type": "number",
-                  "example": 18
-                },
-                "startupStage": {
-                  "type": "string",
-                  "example": "Growth"
-                },
-                "fundingStage": {
-                  "type": "string",
-                  "example": "Seed"
-                },
-                "turnover": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "year": {
-                        "type": "number",
-                        "example": 2024
-                      },
-                      "amount": {
-                        "type": "number",
-                        "example": 65000
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "201": {
-            "description": "Created"
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
-            "description": "Not Found",
-            "message": "Startup not found!"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "Not Found"
           }
         }
       },
       "put": {
         "tags": [
-          "Startups CRUD Operations"
+          "Startups Endpoints"
         ],
-        "summary": "Update Startup Info",
+        "summary": "Update startup info",
         "description": "Edit a specific startup and save update in database. ",
         "parameters": [
           {
@@ -572,14 +339,14 @@
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "delete": {
         "tags": [
-          "Startups CRUD Operations"
+          "Startups Endpoints"
         ],
         "summary": "Delete startup",
         "description": "Delete selected startup from the database.",
@@ -596,8 +363,8 @@
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }

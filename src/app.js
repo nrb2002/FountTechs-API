@@ -5,6 +5,9 @@ const defaultRoute = require("./routes/index");
 const startupsRoutes = require("./routes/startups.routes");
 const swaggerRoutes = require("./routes/swagger.routes");
 
+//Import errorHandler and use it as the last middleware at the very bottom
+const errorHandler = require("./middleware/errorHandler"); 
+
 const app = express();
 
 // Middleware
@@ -27,5 +30,16 @@ app.use("/", defaultRoute);
 // Other routes
 app.use("/startups", startupsRoutes);
 app.use("/api-docs", swaggerRoutes);
+
+
+
+
+
+
+
+
+
+// Error Handler
+app.use(errorHandler);
 
 module.exports = app;

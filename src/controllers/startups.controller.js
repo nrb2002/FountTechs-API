@@ -1,33 +1,24 @@
 const startupsService = require("../services/startups.service");
 
+
 // GET all startups
-const getAllStartups = async (req, res) => {
-  //#swagger.tags=["Startups CRUD Operations"]
-  //#swagger.summary="Get All startups"
+const getAllStartups = async (req, res, next) => {
+  //#swagger.tags=["Startups Endpoints"]
+  //#swagger.summary="Get all startups"
   //#swagger.description="Pull all startups from the database. "
   try {
     const startups = await startupsService.getAllStartups();
 
-    //#swagger.tags=[if (startups.length === 0) { ]
-    //#swagger.tags=[   return res.status(404).json({ message: "No startups found" }); ]
-    //#swagger.tags=[ } ]
-
     //Return the startups
     res.status(200).json(startups);
-    // #swagger.responses[200] = {
-    //  description: 'Startup retrieved successfully'
-    // }
-
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    next(error);
   }
 };
 
 // GET single startup
-const getSingleStartup = async (req, res) => {
-  //#swagger.tags=["Startups CRUD Operations"]
+const getSingleStartup = async (req, res, next) => {
+  //#swagger.tags=["Startups Endpoints"]
   //#swagger.summary="Get single startup"
   //#swagger.description="Pull one startup by ID from the database. "
   /* #swagger.parameters['id'] = {
@@ -41,30 +32,22 @@ const getSingleStartup = async (req, res) => {
 
     if (!startup) {
       return res.status(404).json({
-        // #swagger.responses[404] = {
-        //   description: 'Startup not found'
-        // }
         message: "Startup not found!",
       });
     }
 
     res.status(200).json(startup);
+
   } catch (error) {
-    res.status(500).json({
-      // #swagger.responses[500] = {
-      //   description: 'Internal server error'
-      // }
-      message: error.message,
-    });
+    next(error);
   }
 };
 
 // CREATE startup
-const createStartup = async (req, res) => {
-  //#swagger.tags=["Startups CRUD Operations"]
-  //#swagger.summary="Create New Startup"
+const createStartup = async (req, res, next) => {
+  //#swagger.tags=["Startups Endpoints"]
+  //#swagger.summary="Create a new startup"
   //#swagger.description="Insert new startup in the database. "
-  
   /* #swagger.parameters["body"] = {
     in: "body",
     description: "New startup data",
@@ -103,58 +86,53 @@ const createStartup = async (req, res) => {
     const newStartup = await startupsService.createStartup(req.body);
 
     res.status(201).json(newStartup);
-
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    next(error);
   }
 };
 
 // UPDATE startup
-const updateStartup = async (req, res) => {
-  //#swagger.tags=["Startups CRUD Operations"]
-  //#swagger.summary="Update Startup Info"
+const updateStartup = async (req, res, next) => {
+  //#swagger.tags=["Startups Endpoints"]
+  //#swagger.summary="Update startup info"
   //#swagger.description="Edit a specific startup and save update in database. "
-
   /* #swagger.parameters['id'] = {
         in: 'path',
         description: 'Startup ID',
         required: true,
         type: 'string'
   } */
-
   /* #swagger.parameters["body"] = {
-    in: "body",
-    description: "Update startup data",
-    required: true,
-    schema: {
-      name: "KongoTech",
-      description: "FinTech startup providing digital payment solutions",
-      industry: "FinTech",
-      foundedYear: 2022,
-      founders: ["Baron Mobs"],
-      website: "https://kongotech.com",
-      email: "info@kongotech.com",
-      phone: "+243810000000",
-      location: {
-        city: "Kinshasa",
-        province: "Kinshasa",
-        country: "DR Congo"
-      },
-      products: ["Mobile Wallet"],
-      services: ["Payment Processing"],
-      employees: 18,
-      startupStage: "Growth",
-      fundingStage: "Seed",
-      turnover: [
-        {
-          year: 2024,
-          amount: 65000
+        in: "body",
+        description: "Update startup data",
+        required: true,
+        schema: {
+          name: "KongoTech",
+          description: "FinTech startup providing digital payment solutions",
+          industry: "FinTech",
+          foundedYear: 2022,
+          founders: ["Baron Mobs"],
+          website: "https://kongotech.com",
+          email: "info@kongotech.com",
+          phone: "+243810000000",
+          location: {
+            city: "Kinshasa",
+            province: "Kinshasa",
+            country: "DR Congo"
+          },
+          products: ["Mobile Wallet"],
+          services: ["Payment Processing"],
+          employees: 18,
+          startupStage: "Growth",
+          fundingStage: "Seed",
+          turnover: [
+            {
+              year: 2024,
+              amount: 65000
+            }
+          ]
         }
-      ]
-    }
-} */
+    } */
   try {
     const updatedStartup = await startupsService.updateStartup(
       req.params.id,
@@ -163,18 +141,16 @@ const updateStartup = async (req, res) => {
 
     res.status(200).json(updatedStartup);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    next(error);
   }
 };
 
 // DELETE startup
-const deleteStartup = async (req, res) => {
-  //#swagger.tags=["Startups CRUD Operations"]
+const deleteStartup = async (req, res, next) => {
+  //#swagger.tags=["Startups Endpoints"]
   //#swagger.summary="Delete startup"
   //#swagger.description="Delete selected startup from the database."
-  
+
   /* #swagger.parameters['id'] = {
         in: 'path',
         description: 'startup ID',
@@ -187,10 +163,9 @@ const deleteStartup = async (req, res) => {
     res.status(200).json({
       message: "Startup deleted successfully!",
     });
+
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    next(error);
   }
 };
 

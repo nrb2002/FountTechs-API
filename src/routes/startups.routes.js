@@ -2,6 +2,11 @@
 const express = require("express");
 const router = express.Router();
 
+//Import validation middlewares
+const { startupValidationRules, validate } = require("../middleware/validate");
+
+const validateObjectId = require("../middleware/validateObjectId");
+
 //Import controller functions
 const {
   getSingleStartup,
@@ -15,15 +20,22 @@ const {
 
 //Get startups Routes
 router.get("/", getAllStartups);
-router.get("/:id", getSingleStartup);
+
+router.get("/:id", validateObjectId, getSingleStartup);
 
 //Create New Startup route
-router.post("/", createStartup);
+router.post("/", startupValidationRules(), validate, createStartup);
 
 //Update Startup route
-router.put("/:id", updateStartup);
+router.put(
+  "/:id",
+  validateObjectId,
+  startupValidationRules(),
+  validate,
+  updateStartup,
+);
 
 //Delete Startup route
-router.delete("/:id", deleteStartup);
+router.delete("/:id", validateObjectId, deleteStartup);
 
 module.exports = router;
