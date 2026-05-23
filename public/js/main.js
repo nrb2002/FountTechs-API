@@ -1,7 +1,9 @@
+const loadStats = require("./stats");
+
 function animateValue(id, endValue) {
   const element = document.getElementById(id);
   let current = 0;
-  const increment = Math.ceil(endValue / 60);
+  const increment = Math.ceil(endValue / 60); // Adjust the divisor to control animation speed
   
   const timer = setInterval(() => {
     current += increment;
@@ -15,9 +17,17 @@ function animateValue(id, endValue) {
   }, 25);
 }
 
-animateValue("startupCount", 150);
-animateValue("industryCount", 24);
-animateValue("countryCount", 12);
+loadStats().then((startups, industries, cities) => {
+  animateValue("startup-count", startups.length);
+  animateValue("industry-count", industries.size);
+  animateValue("city-count", cities.size);
+});
+
+
+
+
+
+
 
 // Current Year
 function currentYear(){
