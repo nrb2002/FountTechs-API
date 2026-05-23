@@ -18,3 +18,5 @@ async function checkApiStatus() {
 }
 
 checkApiStatus();
+
+module.exports = checkApiStatus;

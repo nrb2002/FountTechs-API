@@ -18,3 +18,13 @@ function animateValue(id, endValue) {
 animateValue("startupCount", 150);
 animateValue("industryCount", 24);
 animateValue("countryCount", 12);
+
+// Current Year
+function currentYear(){
+  document.getElementById("current-year")
+    .textContent = new Date().getFullYear();
+}
+
+currentYear();
+
+module.exports = currentYear;
