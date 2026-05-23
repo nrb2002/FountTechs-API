@@ -19,7 +19,7 @@ const doc = {
   //For production
   host:
     process.env.NODE_ENV === "production"
-      ? "https://founttech-api.onrender.com"
+      ? "founttech-api.onrender.com"
       : "localhost:8080",
   schemes: ["http", "https"],
 
