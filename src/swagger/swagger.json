@@ -7,7 +7,7 @@
     "author": "Baron T.",
     "last update": "2026-05-22"
   },
-  "host": "https://founttech-api.onrender.com",
+  "host": "founttech-api.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
