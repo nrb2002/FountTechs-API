@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FountTech API</title>
+    
+    <!-- Import CSS Files -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/medium.css">
+    <link rel="stylesheet" href="css/larger.css">
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+    
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                API Online
+            </div>
+    
+            <h1>FountTech API</h1>
+    
+            <p>
+                A modern RESTful API for discovering, managing, and exploring local startup information from the Democratic Republic of the Congo.
+            </p>
+    
+            <div class="hero-buttons">
+                <a href="http://localhost:8080/api-docs" class="btn">Documentation</a>
+                <a href="http://localhost:8080/startups" class="btn btn-secondary">Explore API</a>
+            </div>
+    
+        </div>
+    </header>
+    <hr>
+
+    <main class="page-background">
+        <!-- About Section -->
+        <section class="about">
+            <div class="container">
+                <h2>About</h2>
+                <p>
+                    FountTech API provides structured startup information through a
+                    modern RESTful interface. Access startup profiles, founders,
+                    industries, funding stages, products, services, and business data from the Democratic Republic of the Congo.
+                </p>
+            </div>
+        </section>
+        <hr>
+
+        <!-- Target Users Section -->
+        <section class="target-users">
+            <div class="container">
+        
+                <h2>Who Is This API For?</h2>
+        
+                <p class="section-intro">
+                    FountTech API is designed for developers, entrepreneurs,
+                    researchers, incubators, accelerators, investors, and organizations
+                    seeking structured startup ecosystem data.
+                </p>
+        
+                <div class="cards">        
+                    <article class="glass-card">
+                        <h3>Developers</h3>
+                        <p>
+                            Integrate startup data into websites, mobile applications,
+                            dashboards, and business intelligence platforms.
+                        </p>
+                    </article>
+        
+                    <article class="glass-card">
+                        <h3>Investors</h3>
+                        <p>
+                            Discover startups by industry, location, growth stage,
+                            and funding profile.
+                        </p>
+                    </article>
+        
+                    <article class="glass-card">
+                        <h3>Incubators & Accelerators</h3>
+                        <p>
+                            Track startup portfolios, monitor ecosystem growth,
+                            and identify emerging ventures.
+                        </p>
+                    </article>
+        
+                    <article class="glass-card">
+                        <h3>Researchers</h3>
+                        <p>
+                            Analyze startup trends, industries, employment,
+                            and business performance data.
+                        </p>
+                    </article>
+        
+                </div>
+        
+            </div>
+        </section>
+        <hr>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+        
+                <h2>How to Use the API</h2>
+        
+                <div class="steps">
+        
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <h3>Read the Documentation</h3>
+                        <p>
+                            Visit the Swagger documentation to explore available
+                            endpoints and request formats.
+                        </p>
+                    </div>
+        
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <h3>Connect Your Application</h3>
+                        <p>
+                            Send HTTP requests using your preferred frontend,
+                            backend, mobile app, or automation tool.
+                        </p>
+                    </div>
+        
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <h3>Retrieve Startup Data</h3>
+                        <p>
+                            Access startup profiles, locations, industries,
+                            products, services, and funding information.
+                        </p>
+                    </div>
+        
+                    <div class="step">
+                        <span class="step-number">4</span>
+                        <h3>Manage Records</h3>
+                        <p>
+                            Create, update, and delete startup records through
+                            secure RESTful endpoints.
+                        </p>
+                    </div>
+        
+                </div>
+        
+            </div>
+        </section>
+        <hr>
+        
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2>Core Features</h2>
+
+                <div class="cards">
+
+                    <article class="glass-card">
+                        <h3>CRUD Operations</h3>
+                        <p>Create, read, update, and delete startup records.</p>
+                    </article>
+
+                    <article class="glass-card">
+                        <h3>MongoDB</h3>
+                        <p>Reliable cloud database storage.</p>
+                    </article>
+
+                    <article class="glass-card">
+                        <h3>Validation</h3>
+                        <p>Robust request validation and error handling.</p>
+                    </article>
+
+                    <article class="glass-card">
+                        <h3>Swagger Docs</h3>
+                        <p>Interactive API documentation.</p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+        <hr>
+
+        <section class="endpoints">
+            <div class="container">
+                <h2>Available Endpoints</h2>
+
+                <div class="endpoint">GET /startups</div>
+                <div class="endpoint">GET /startups/:id</div>
+                <div class="endpoint">POST /startups</div>
+                <div class="endpoint">PUT /startups/:id</div>
+                <div class="endpoint">DELETE /startups/:id</div>
+
+            </div>
+        </section>
+        <hr>
+
+        <section class="tech-stack">
+            <div class="container">
+                <h2>Technology Stack</h2>
+
+                <ul>
+                    <li>Node.js</li>
+                    <li>Express.js</li>
+                    <li>MongoDB</li>
+                    <li>Mongoose</li>
+                    <li>Swagger</li>
+                    <li>Render</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>FountTech API v1.0.0 | Built by Baron T.</p>
+    </footer>
+
+</body>
+
+    <script src="js/main.js"></script>
+</html>

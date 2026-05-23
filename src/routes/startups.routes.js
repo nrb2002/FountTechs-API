@@ -36,6 +36,10 @@ router.put(
 );
 
 //Delete Startup route
-router.delete("/:id", validateObjectId, deleteStartup);
+router.delete(
+  "/:id", 
+  validateObjectId, 
+  deleteStartup
+);
 
 module.exports = router;

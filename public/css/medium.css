@@ -1,0 +1,21 @@
+@media screen and (min-width: 768px) {
+
+    .hero-content h1 {
+        font-size: 4rem;
+    }
+
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .users-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
