@@ -1,32 +1,24 @@
-const loadStats = require("./stats");
+const statusText = document.getElementById("api-status");
+const statusDot = document.querySelector(".status-dot");
 
-function animateValue(id, endValue) {
-  const element = document.getElementById(id);
-  let current = 0;
-  const increment = Math.ceil(endValue / 60); // Adjust the divisor to control animation speed
-  
-  const timer = setInterval(() => {
-    current += increment;
+// Check API status -- For local development, change the URL to your backend endpoint
+async function checkApiStatus() {
+  try {
+    const response = await fetch("http://localhost:8080/api-docs"); //Change localhost URL to your backend endpoint
 
-    if (current >= endValue) {
-      current = endValue;
-      clearInterval(timer);
+    if (response.ok) {
+      statusText.textContent = "API Online";
+      statusDot.classList.add("online");
+    } else {
+      throw new Error();
     }
-
-    element.textContent = current;
-  }, 25);
+  } catch (error) {
+    statusText.textContent = "API Offline";
+    statusDot.classList.add("offline");
+  }
 }
 
-loadStats().then((startups, industries, cities) => {
-  animateValue("startup-count", startups.length);
-  animateValue("industry-count", industries.size);
-  animateValue("city-count", cities.size);
-});
-
-
-
-
-
+checkApiStatus();
 
 
 // Current Year
@@ -37,4 +29,14 @@ function currentYear(){
 
 currentYear();
 
-module.exports = currentYear;
+
+
+
+
+
+
+
+module.exports = {
+  checkApiStatus,
+  currentYear
+};

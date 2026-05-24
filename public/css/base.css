@@ -30,6 +30,92 @@ body {
     margin: auto;
 }
 
+.navbar {
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    backdrop-filter: blur(10px);
+
+    background: rgba(15, 23, 42, 0.85);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 1rem 2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+
+    list-style: none;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.9);
+
+    text-decoration: none;
+
+    transition: color .3s ease;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.sign-in-btn {
+    background: #2563eb;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: .75rem 1.5rem;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    transition: .3s ease;
+}
+
+.sign-in-btn:hover {
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+
+    background: none;
+    border: none;
+
+    color: white;
+
+    font-size: 1.8rem;
+
+    cursor: pointer;
+}
+
 header {
     background: linear-gradient(135deg, #0f172a, #1e3a8a);
     color: white;
@@ -61,7 +147,7 @@ header p {
     background:
         linear-gradient(rgba(15, 23, 42, 0.75),
             rgba(15, 23, 42, 0.75)),
-        url("../images/founttech-hero.jpg");
+        url("../images/founttech-hero-2.jpg");
 
     background-size: cover;
     background-position: center;
@@ -75,8 +161,9 @@ header p {
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
     margin-bottom: 1rem;
+    font-weight: 400;
 }
 
 .hero p {
@@ -172,11 +259,19 @@ hr {
     gap: 1.5rem;
 }
 
+.stats .counter{
+    font-size: 1.5rem;
+    font-weight: 700;
+    background-color: var(--glass);
+    border-radius: 50%;
+    padding: 1.5rem 2rem;
+}
+
 .stat-card {
     background: var(--glass);
     backdrop-filter: blur(15px);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 50%;
     padding: 1.5rem 2rem;
     min-width: 170px;
     text-align: center;
@@ -295,9 +390,11 @@ hr {
 }
 
 .steps {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-content: center;   
 
     margin-top: 4rem;
 }

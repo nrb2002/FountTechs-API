@@ -11,14 +11,41 @@
     <link rel="stylesheet" href="css/medium.css">
     <link rel="stylesheet" href="css/larger.css">
 
-    <script src="js/main.js" defer></script>
-    <script type="module" src="js/stats.js"></script>
-    <script type="module" src="js/status.js"></script>
+    <script src="js/navBar.js" defer></script>
+    <script type="module" src="js/main.js"></script>
+    <script src="js/stats.js" defer></script>
+    
 </head>
 
 <body>
-
+    <nav class="navbar">
+    
+        <div class="nav-container">    
+            <a href="./" class="logo">
+                FountTech
+            </a>
+    
+            <button class="menu-toggle" aria-label="Open Menu">
+                ☰
+            </button>
+    
+            <ul class="nav-links">
+                <li><a href="#target-users">Users</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#endpoints">Endpoints</a></li>
+                <li><a href="http://localhost:8080/api-docs" target="_blank">Documentation</a></li>
+            </ul>
+    
+            <a href="/signin" class="sign-in-btn">
+                Sign In
+            </a>
+    
+        </div>
+    
+    </nav>
     <header class="hero">
+        
+
         <div class="hero-content">
     
             <div class="status-badge">
@@ -77,7 +104,7 @@
         <hr>
 
         <!-- Target Users Section -->
-        <section class="target-users">
+        <section id="target-users" class="target-users">
             <div class="container">
         
                 <h2>Who Is This API For?</h2>
@@ -128,7 +155,7 @@
         <hr>
 
         <!-- How It Works Section -->
-        <section class="how-it-works">
+        <section id="how-it-works" class="how-it-works">
             <div class="container">
         
                 <h2>How to Use the API</h2>
@@ -209,7 +236,7 @@
         </section>
         <hr>
 
-        <section class="endpoints">
+        <section id="endpoints" class="endpoints">
             <div class="container">
                 <h2>Available Endpoints</h2>
 
