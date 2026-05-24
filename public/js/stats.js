@@ -6,6 +6,8 @@ async function loadStats() {
       await fetch("/startups"); //For local development, change the URL to your backend endpoint
 
     const startups = await response.json();
+    console.log(startups);
+    console.log(Array.isArray(startups));
 
     const industries = new Set();
     const cities = new Set();
