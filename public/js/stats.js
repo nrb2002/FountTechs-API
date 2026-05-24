@@ -3,7 +3,7 @@
 async function loadStats() {
   try {
     const response = 
-      await fetch("http://localhost:8080/startups"); //For local development, change the URL to your backend endpoint
+      await fetch("http://founttech-api.onrender.com/startups"); //For local development, change the URL to your backend endpoint
 
     const startups = await response.json();
 
