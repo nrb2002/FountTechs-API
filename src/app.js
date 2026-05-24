@@ -37,7 +37,13 @@ app.use("/", defaultRoute);
 app.use("/startups", startupsRoutes);
 app.use("/api-docs", swaggerRoutes);
 
-
+// Health Check Endpoint to check the API status, which can be used by the frontend to display the API status on the UI
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "online",
+    uptime: process.uptime()
+  });
+});
 
 
 
