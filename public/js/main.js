@@ -4,7 +4,7 @@ const statusDot = document.querySelector(".status-dot");
 // Check API status -- For local development, change the URL to your backend endpoint
 async function checkApiStatus() {
   try {
-    const response = await fetch("http://founttech-api.onrender.com/api-docs"); //Change localhost URL to your backend endpoint
+    const response = await fetch("/health"); //Change localhost URL to your backend endpoint
 
     if (response.ok) {
       statusText.textContent = "API Online";
@@ -14,6 +14,8 @@ async function checkApiStatus() {
     }
   } catch (error) {
     statusText.textContent = "API Offline";
+
+    statusDot.classList.remove("online");
     statusDot.classList.add("offline");
   }
 }
