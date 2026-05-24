@@ -34,11 +34,3 @@ currentYear();
 
 
 
-
-
-
-
-module.exports = {
-  checkApiStatus,
-  currentYear
-};
