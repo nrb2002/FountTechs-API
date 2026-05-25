@@ -4,6 +4,7 @@ const startupsService = require("../services/startups.service");
 // GET all startups
 const getAllStartups = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
+  //#swagger.tags=["Get Endpoints"]
   //#swagger.summary="Get all startups"
   //#swagger.description="Pull all startups from the database. "
   try {
@@ -19,6 +20,7 @@ const getAllStartups = async (req, res, next) => {
 // GET single startup
 const getSingleStartup = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
+  //#swagger.tags=["Get Endpoints"]
   //#swagger.summary="Get single startup"
   //#swagger.description="Pull one startup by ID from the database. "
   /* #swagger.parameters['id'] = {
@@ -46,6 +48,7 @@ const getSingleStartup = async (req, res, next) => {
 // CREATE startup
 const createStartup = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
+  //#swagger.tags=["Post Endpoint"]
   //#swagger.summary="Create a new startup"
   //#swagger.description="Insert new startup in the database. "
   /* #swagger.parameters["body"] = {
@@ -80,6 +83,7 @@ const createStartup = async (req, res, next) => {
 // UPDATE startup
 const updateStartup = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
+  //#swagger.tags=["Put Endpoint"]
   //#swagger.summary="Update startup info"
   //#swagger.description="Edit a specific startup and save update in database. "
   /* #swagger.parameters['id'] = {
@@ -140,6 +144,7 @@ const updateStartup = async (req, res, next) => {
 // DELETE startup
 const deleteStartup = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
+  //#swagger.tags=["Delete Endpoints"]
   //#swagger.summary="Delete startup"
   //#swagger.description="Delete selected startup from the database."
 

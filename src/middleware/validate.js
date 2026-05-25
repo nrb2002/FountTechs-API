@@ -46,15 +46,10 @@ const startupValidationRules = () => {
       .withMessage("Location must be an object; some fields are required."),
 
     body("location.ward").optional().isString(),
-
     body("location.stake").optional().isString(),
-
     body("location.commune").notEmpty().isString(),
-
     body("location.city").notEmpty().isString(),
-
     body("location.province").optional().isString(),
-
     body("location.country").optional().isString(),
     
     body("phone").notEmpty().isString().withMessage("Phone must be a string"),
