@@ -11,33 +11,26 @@ const startupSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+      trim: true,
     },
 
     industry: {
       type: String,
       required: true,
-    },
-
-    foundedYear: {
-      type: Number,
+      trim: true,
     },
 
     founders: [
       {
         type: String,
+        required: true,
+        trim: true,
       },
     ],
 
-    website: {
-      type: String,
-    },
-
-    email: {
-      type: String,
-    },
-
-    phone: {
-      type: String,
+    foundedYear: {
+      type: Number,
+      required: true,
     },
 
     location: {
@@ -49,13 +42,21 @@ const startupSchema = new mongoose.Schema(
       country: String,
     },
 
-    products: [
-      {
-        type: String,
-      },
-    ],
+    phone: {
+      type: String,
+      required: true,
+    },
 
-    services: [
+    website: {
+      type: String,
+    },
+
+    email: {
+      type: String,
+    },
+
+    
+    products: [
       {
         type: String,
       },
@@ -105,5 +106,37 @@ const startupSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+// Re-order fields when rendering json
+startupSchema.set("toJSON", {
+  transform: (doc, ret) => ({
+    _id: ret._id,
+    name: ret.name,
+    description: ret.description,
+    industry: ret.industry,
+
+    founders: ret.founders,
+    foundedYear: ret.foundedYear,
+
+    location: ret.location,
+
+    phone: ret.phone,
+    email: ret.email,
+    website: ret.website,
+    
+    products: ret.products,
+
+    employees: ret.employees,
+
+    startupStage: ret.startupStage,
+    fundingStage: ret.fundingStage,
+    turnover: ret.turnover,
+    socialMedia: ret.socialMedia,
+    isActive: ret.isActive,
+    createdAt: ret.createdAt,
+    updatedAt: ret.updatedAt,
+    __v: ret.__v
+  })
+});
 
 module.exports = mongoose.model("Startup", startupSchema);

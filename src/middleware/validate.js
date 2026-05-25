@@ -4,28 +4,28 @@ const startupValidationRules = () => {
   return [
     // Required fields
     body("name")
-      .trim()
-      .notEmpty()
       .isString()
+      .notEmpty()
+      .trim()
       .withMessage("Startup name is required"),
 
     body("description")
-      .trim()
       .notEmpty()
       .isString()
+      .trim()
       .withMessage("Description is required"),
 
     body("industry")
-      .trim()
       .notEmpty()
       .isString()
+      .trim()
       .withMessage("Industry is required"),
 
     body("founders")
       .trim()
       .notEmpty()
       .isArray()
-      .withMessage("Founders is required and must be an array"),
+      .withMessage("Founders is required and must be an array. Name order should be: Firstname, Middle Name, Last Name"),
 
     body("founders.*")
       .trim()
@@ -39,33 +39,35 @@ const startupValidationRules = () => {
       .isInt({ min: 1900, max: new Date().getFullYear() })
       .withMessage("Founded year must be a valid year"),
 
-    // Optional fields
-    body("website")
-      .optional()
-      .isURL()
-      .withMessage("Website must be a valid URL"),
-
-    body("email").optional().isEmail().withMessage("Email must be valid"),
-
-    body("phone").optional().isString().withMessage("Phone must be a string"),
-
     // Location
     body("location")
-      .optional()
+      .notEmpty()
       .isObject()
-      .withMessage("Location must be an object"),
+      .withMessage("Location must be an object; some fields are required."),
 
     body("location.ward").optional().isString(),
 
     body("location.stake").optional().isString(),
 
-    body("location.commune").optional().isString(),
+    body("location.commune").notEmpty().isString(),
 
-    body("location.city").optional().isString(),
+    body("location.city").notEmpty().isString(),
 
     body("location.province").optional().isString(),
 
     body("location.country").optional().isString(),
+    
+    body("phone").notEmpty().isString().withMessage("Phone must be a string"),
+    
+    
+    // Optional fields
+
+    body("email").optional().isEmail().withMessage("Email must be valid"),
+
+    body("website")
+      .optional()
+      .isURL()
+      .withMessage("Website must be a valid URL"),
 
     // Products
     body("products")
@@ -77,17 +79,6 @@ const startupValidationRules = () => {
       .optional()
       .isString()
       .withMessage("Each product must be a string"),
-
-    // Services
-    body("services")
-      .optional()
-      .isArray()
-      .withMessage("Services must be an array"),
-
-    body("services.*")
-      .optional()
-      .isString()
-      .withMessage("Each service must be a string"),
 
     // Employees
     body("employees")

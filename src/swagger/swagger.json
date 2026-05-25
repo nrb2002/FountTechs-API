@@ -7,35 +7,13 @@
     "author": "Baron T.",
     "last update": "2026-05-22"
   },
-  "host": "founttech-api.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
-    "/health": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "tags": [
-          "Home Page"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/startups/": {
       "get": {
         "tags": [
@@ -76,10 +54,6 @@
                   "type": "string",
                   "example": "FinTech"
                 },
-                "foundedYear": {
-                  "type": "number",
-                  "example": 2022
-                },
                 "founders": {
                   "type": "array",
                   "example": [
@@ -89,17 +63,9 @@
                     "type": "string"
                   }
                 },
-                "website": {
-                  "type": "string",
-                  "example": "https://kongotech.com"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "info@kongotech.com"
-                },
-                "phone": {
-                  "type": "string",
-                  "example": "+243810000000"
+                "foundedYear": {
+                  "type": "number",
+                  "example": 2022
                 },
                 "location": {
                   "type": "object",
@@ -130,51 +96,9 @@
                     }
                   }
                 },
-                "products": {
-                  "type": "array",
-                  "example": [
-                    "Mobile Wallet"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "services": {
-                  "type": "array",
-                  "example": [
-                    "Payment Processing"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "employees": {
-                  "type": "number",
-                  "example": 18
-                },
-                "startupStage": {
+                "phone": {
                   "type": "string",
-                  "example": "Growth"
-                },
-                "fundingStage": {
-                  "type": "string",
-                  "example": "Seed"
-                },
-                "turnover": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "year": {
-                        "type": "number",
-                        "example": 2024
-                      },
-                      "amount": {
-                        "type": "number",
-                        "example": 65000
-                      }
-                    }
-                  }
+                  "example": "+243810000000"
                 }
               }
             }
@@ -252,10 +176,6 @@
                   "type": "string",
                   "example": "FinTech"
                 },
-                "foundedYear": {
-                  "type": "number",
-                  "example": 2022
-                },
                 "founders": {
                   "type": "array",
                   "example": [
@@ -265,21 +185,25 @@
                     "type": "string"
                   }
                 },
-                "website": {
-                  "type": "string",
-                  "example": "https://kongotech.com"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "info@kongotech.com"
-                },
-                "phone": {
-                  "type": "string",
-                  "example": "+243810000000"
+                "foundedYear": {
+                  "type": "number",
+                  "example": 2022
                 },
                 "location": {
                   "type": "object",
                   "properties": {
+                    "ward": {
+                      "type": "string",
+                      "example": "Ngiri-Ngiri"
+                    },
+                    "stake": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "commune": {
+                      "type": "string",
+                      "example": "Ngiri-Ngiri"
+                    },
                     "city": {
                       "type": "string",
                       "example": "Kinshasa"
@@ -294,19 +218,22 @@
                     }
                   }
                 },
+                "phone": {
+                  "type": "string",
+                  "example": "+243810000000"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "info@kongotech.com"
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://kongotech.com"
+                },
                 "products": {
                   "type": "array",
                   "example": [
                     "Mobile Wallet"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "services": {
-                  "type": "array",
-                  "example": [
-                    "Payment Processing"
                   ],
                   "items": {
                     "type": "string"

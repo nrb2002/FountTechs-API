@@ -56,30 +56,16 @@ const createStartup = async (req, res, next) => {
       name: "KongoTech",
       description: "FinTech startup providing digital payment solutions",
       industry: "FinTech",
-      foundedYear: 2022,
       founders: ["Baron Mobs"],
-      website: "https://kongotech.com",
-      email: "info@kongotech.com",
-      phone: "+243810000000",
-      location: {
+      foundedYear: 2022,location: {
         ward: "Ngiri-Ngiri",
         stake: "Kinshasa",
         commune: "Ngiri-Ngiri",
         city: "Kinshasa",
         province: "Kinshasa",
         country: "DR Congo"
-      },
-      products: ["Mobile Wallet"],
-      services: ["Payment Processing"],
-      employees: 18,
-      startupStage: "Growth",
-      fundingStage: "Seed",
-      turnover: [
-        {
-          year: 2024,
-          amount: 65000
-        }
-      ]
+      }, 
+      phone: "+243810000000"
     }
 } */
   try {
@@ -110,18 +96,23 @@ const updateStartup = async (req, res, next) => {
           name: "KongoTech",
           description: "FinTech startup providing digital payment solutions",
           industry: "FinTech",
-          foundedYear: 2022,
           founders: ["Baron Mobs"],
-          website: "https://kongotech.com",
-          email: "info@kongotech.com",
-          phone: "+243810000000",
+          foundedYear: 2022,
+          
           location: {
+            ward: "Ngiri-Ngiri",
+            stake: "Kinshasa",
+            commune: "Ngiri-Ngiri",
             city: "Kinshasa",
             province: "Kinshasa",
             country: "DR Congo"
           },
+
+          phone: "+243810000000",          
+          email: "info@kongotech.com",
+          website: "https://kongotech.com",
+          
           products: ["Mobile Wallet"],
-          services: ["Payment Processing"],
           employees: 18,
           startupStage: "Growth",
           fundingStage: "Seed",
@@ -133,6 +124,7 @@ const updateStartup = async (req, res, next) => {
           ]
         }
     } */
+   
   try {
     const updatedStartup = await startupsService.updateStartup(
       req.params.id,
