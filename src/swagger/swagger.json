@@ -7,9 +7,10 @@
     "author": "Baron T.",
     "last update": "2026-05-22"
   },
-  "host": "founttech-api.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
@@ -300,6 +301,270 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "Users Endpoints"
+        ],
+        "summary": "Get all users",
+        "description": "Retrieve all users from the database.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users Endpoints"
+        ],
+        "summary": "Create a new user",
+        "description": "Insert a new user into the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "New user data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Baron"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Mobs"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "barontech"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "baron@founttech.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "Founder"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "+243810000000"
+                },
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "province": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "DR Congo"
+                    }
+                  }
+                },
+                "profilePicture": {
+                  "type": "string",
+                  "example": "https://example.com/profile.jpg"
+                },
+                "bio": {
+                  "type": "string",
+                  "example": "Startup founder and software developer."
+                },
+                "isVerified": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "startups": {
+                  "type": "array",
+                  "example": [
+                    "6650e7f97dbe9e00124a9abc"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users Endpoints"
+        ],
+        "summary": "Get single user",
+        "description": "Retrieve one user by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users Endpoints"
+        ],
+        "summary": "Update user information",
+        "description": "Edit a specific user and save updates in the database.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated user data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Baron"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Mobs"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "barontech"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "baron@founttech.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "Founder"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "+243810000000"
+                },
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "province": {
+                      "type": "string",
+                      "example": "Kinshasa"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "DR Congo"
+                    }
+                  }
+                },
+                "profilePicture": {
+                  "type": "string",
+                  "example": "https://example.com/profile.jpg"
+                },
+                "bio": {
+                  "type": "string",
+                  "example": "Startup founder and software developer."
+                },
+                "isVerified": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "isActive": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "startups": {
+                  "type": "array",
+                  "example": [
+                    "6650e7f97dbe9e00124a9abc"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users Endpoints"
+        ],
+        "summary": "Delete user",
+        "description": "Delete a selected user from the database.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }

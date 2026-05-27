@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({
       success: false,
       message: "Validation Error",
-      errors: Object.values(err.errors).map(error => error.message)
+      errors: Object.values(err.errors).map((error) => error.message),
     });
   }
 
@@ -14,7 +14,7 @@ const errorHandler = (err, req, res, next) => {
   if (err.name === "CastError") {
     return res.status(400).json({
       success: false,
-      message: "Invalid startup ID"
+      message: "Invalid startup ID",
     });
   }
 
@@ -23,14 +23,14 @@ const errorHandler = (err, req, res, next) => {
     return res.status(409).json({
       success: false,
       message: "Duplicate value entered",
-      field: Object.keys(err.keyValue)
+      field: Object.keys(err.keyValue),
     });
   }
 
   // Default server error
   res.status(err.statusCode || 500).json({
     success: false,
-    message: err.message || "Internal Server Error"
+    message: err.message || "Internal Server Error",
   });
 };
 

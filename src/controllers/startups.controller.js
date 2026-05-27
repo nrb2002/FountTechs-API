@@ -1,6 +1,5 @@
 const startupsService = require("../services/startups.service");
 
-
 // GET all startups
 const getAllStartups = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
@@ -39,7 +38,6 @@ const getSingleStartup = async (req, res, next) => {
     }
 
     res.status(200).json(startup);
-
   } catch (error) {
     next(error);
   }
@@ -128,7 +126,7 @@ const updateStartup = async (req, res, next) => {
           ]
         }
     } */
-   
+
   try {
     const updatedStartup = await startupsService.updateStartup(
       req.params.id,
@@ -160,7 +158,6 @@ const deleteStartup = async (req, res, next) => {
     res.status(200).json({
       message: "Startup deleted successfully!",
     });
-
   } catch (error) {
     next(error);
   }

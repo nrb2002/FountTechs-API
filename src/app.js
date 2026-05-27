@@ -5,10 +5,11 @@ const path = require("path");
 
 const defaultRoute = require("./routes/index");
 const startupsRoutes = require("./routes/startups.routes");
+const usersRoutes = require("./routes/users.routes");
 const swaggerRoutes = require("./routes/swagger.routes");
 
 //Import errorHandler and use it as the last middleware at the very bottom
-const errorHandler = require("./middleware/errorHandler"); 
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
@@ -32,25 +33,19 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Default route
 //app.use("/", defaultRoute);
 
-
 // Other routes
 app.use("/startups", startupsRoutes);
+app.use("/users", usersRoutes);
 app.use("/api-docs", swaggerRoutes);
 
 // Health Check Endpoint to check the API status, which can be used by the frontend to display the API status on the UI
 app.get("/health", (req, res) => {
-    // #swagger.ignore = true
+  // #swagger.ignore = true
   res.status(200).json({
     status: "online",
-    uptime: process.uptime()
+    uptime: process.uptime(),
   });
 });
-
-
-
-
-
-
 
 // Error Handler
 app.use(errorHandler);

@@ -25,7 +25,9 @@ const startupValidationRules = () => {
       .trim()
       .notEmpty()
       .isArray()
-      .withMessage("Founders is required and must be an array. Name order should be: Firstname, Middle Name, Last Name"),
+      .withMessage(
+        "Founders is required and must be an array. Name order should be: Firstname, Middle Name, Last Name",
+      ),
 
     body("founders.*")
       .trim()
@@ -51,10 +53,9 @@ const startupValidationRules = () => {
     body("location.city").notEmpty().isString(),
     body("location.province").optional().isString(),
     body("location.country").optional().isString(),
-    
+
     body("phone").notEmpty().isString().withMessage("Phone must be a string"),
-    
-    
+
     // Optional fields
 
     body("email").optional().isEmail().withMessage("Email must be valid"),

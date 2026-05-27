@@ -55,7 +55,6 @@ const startupSchema = new mongoose.Schema(
       type: String,
     },
 
-    
     products: [
       {
         type: String,
@@ -123,7 +122,7 @@ startupSchema.set("toJSON", {
     phone: ret.phone,
     email: ret.email,
     website: ret.website,
-    
+
     products: ret.products,
 
     employees: ret.employees,
@@ -135,8 +134,8 @@ startupSchema.set("toJSON", {
     isActive: ret.isActive,
     createdAt: ret.createdAt,
     updatedAt: ret.updatedAt,
-    __v: ret.__v
-  })
+    __v: ret.__v,
+  }),
 });
 
 module.exports = mongoose.model("Startup", startupSchema);
