@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, "../public")));
 
 // Default route
-app.use("/", defaultRoute);
+//app.use("/", defaultRoute);
 
 
 // Other routes
