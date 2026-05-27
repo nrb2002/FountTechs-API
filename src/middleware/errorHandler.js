@@ -10,13 +10,13 @@ const errorHandler = (err, req, res, next) => {
     });
   }
 
-  // // Invalid MongoDB ObjectId
-  // if (err.name === "CastError") {
-  //   return res.status(400).json({
-  //     success: false,
-  //     message: "Invalid startup ID"
-  //   });
-  // }
+  // Invalid MongoDB ObjectId
+  if (err.name === "CastError") {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid startup ID"
+    });
+  }
 
   // Duplicate key errors
   if (err.code === 11000) {
