@@ -1,5 +1,17 @@
-const router = require("express").Router();
+// Import dependencies
+const express = require("express");
+const router = express.Router();
 
+// Import validation rules
+const userValidationRules = require("../validation/user.validation");
+
+// Import validation middleware
+const validate = require("../middleware/validate");
+
+// Import ObjectId validator
+const validateObjectId = require("../middleware/validateObjectId");
+
+// Import controller functions
 const {
   getAllUsers,
   getSingleUser,
@@ -8,14 +20,29 @@ const {
   deleteUser,
 } = require("../controllers/users.controller");
 
+/* =========================
+   USER ROUTES
+========================= */
+
+// GET all users
 router.get("/", getAllUsers);
 
-router.get("/:id", getSingleUser);
+// GET single user
+router.get("/:id", validateObjectId, getSingleUser);
 
-router.post("/", createUser);
+// CREATE user
+router.post("/", userValidationRules(), validate, createUser);
 
-router.put("/:id", updateUser);
+// UPDATE user
+router.put(
+  "/:id",
+  validateObjectId,
+  userValidationRules(),
+  validate,
+  updateUser,
+);
 
-router.delete("/:id", deleteUser);
+// DELETE user
+router.delete("/:id", validateObjectId, deleteUser);
 
 module.exports = router;

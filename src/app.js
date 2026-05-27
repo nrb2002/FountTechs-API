@@ -1,53 +1,80 @@
 const express = require("express");
 const cors = require("cors");
-
 const path = require("path");
 
 const defaultRoute = require("./routes/index");
+
 const startupsRoutes = require("./routes/startups.routes");
+
 const usersRoutes = require("./routes/users.routes");
+
 const swaggerRoutes = require("./routes/swagger.routes");
 
-//Import errorHandler and use it as the last middleware at the very bottom
+// Error handler
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
-// Middleware
+/* =========================
+   GLOBAL MIDDLEWARE
+========================= */
+
 app.use(cors());
+
 app.use(express.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
+
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS",
   );
+
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
   next();
 });
 
-// Serve static files from the public directory
+/* =========================
+   STATIC FILES
+========================= */
+
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Default route
-//app.use("/", defaultRoute);
+/* =========================
+   ROUTES
+========================= */
 
-// Other routes
+// Homepage route
+app.use("/", defaultRoute);
+
+// Startups API
 app.use("/startups", startupsRoutes);
+
+// Users API
 app.use("/users", usersRoutes);
+
+// Swagger Docs
 app.use("/api-docs", swaggerRoutes);
 
-// Health Check Endpoint to check the API status, which can be used by the frontend to display the API status on the UI
+/* =========================
+   HEALTH CHECK
+========================= */
+
 app.get("/health", (req, res) => {
   // #swagger.ignore = true
+
   res.status(200).json({
     status: "online",
     uptime: process.uptime(),
   });
 });
 
-// Error Handler
+/* =========================
+   ERROR HANDLER
+========================= */
+
 app.use(errorHandler);
 
 module.exports = app;
