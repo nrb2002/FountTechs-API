@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
 
     role: {
@@ -80,5 +81,25 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+userSchema.set("toJSON", {
+  transform: (doc, ret) => ({
+    _id: ret._id,
+    firstName: ret.firstName,
+    lastName: ret.lastName,
+    username: ret.username,
+    email: ret.email,
+    role: ret.role,
+    phone: ret.phone,
+    location: ret.location,
+    profilePicture: ret.profilePicture,
+    bio: ret.bio,
+    isVerified: ret.isVerified,
+    isActive: ret.isActive,
+    startups: ret.startups,
+    createdAt: ret.createdAt,
+    updatedAt: ret.updatedAt,
+  }),
+});
 
 module.exports = mongoose.model("User", userSchema);
