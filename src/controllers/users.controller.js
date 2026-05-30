@@ -62,14 +62,7 @@ const createUser = async (req, res, next) => {
         role: "Founder",
         phone: "+243810000000",
 
-        location: {
-          city: "Kinshasa",
-          province: "Kinshasa",
-          country: "DR Congo"
-        },
-
         profilePicture: "https://example.com/profile.jpg",
-
         bio: "Startup founder and software developer.",
 
         isVerified: false,
@@ -84,8 +77,9 @@ const createUser = async (req, res, next) => {
 
   try {
     const newUser = await usersService.createUser(req.body);
+    const user = await usersService.getSingleUser(newUser._id);
 
-    res.status(201).json(newUser);
+    res.status(201).json(user);
   } catch (error) {
     next(error);
   }

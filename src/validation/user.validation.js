@@ -9,10 +9,7 @@ const userValidationRules = () => {
     body("username")
       .trim()
       .notEmpty()
-      .isLength({
-        min: 3,
-        max: 30,
-      })
+      .isLength({ min: 3, max: 30 })
       .withMessage("Username must be between 3 and 30 characters"),
 
     body("email")
@@ -30,6 +27,33 @@ const userValidationRules = () => {
       .optional()
       .isIn(["Founder", "Investor", "Developer", "Admin"])
       .withMessage("Invalid role"),
+
+    body("phone").optional().isString().withMessage("Phone must be a string"),
+
+    body("profilePicture")
+      .optional()
+      .isURL()
+      .withMessage("Profile picture must be a valid URL"),
+
+    body("bio")
+      .optional()
+      .isLength({ max: 500 })
+      .withMessage("Bio cannot exceed 500 characters"),
+
+    body("isVerified")
+      .optional()
+      .isBoolean()
+      .withMessage("isVerified must be true or false"),
+
+    body("isActive")
+      .optional()
+      .isBoolean()
+      .withMessage("isActive must be true or false"),
+
+    body("startups")
+      .optional()
+      .isArray()
+      .withMessage("Startups must be an array"),
   ];
 };
 

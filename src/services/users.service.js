@@ -1,11 +1,15 @@
 const User = require("../models/users.model");
 
 const getAllUsers = async () => {
-  return await User.find().populate("startups");
+  return await User.find()
+    .select("-password")
+    .populate("startups", "name industry foundedYear");
 };
 
 const getSingleUser = async (id) => {
-  return await User.findById(id).populate("startups");
+  return await User.findById(id)
+    .select("-password")
+    .populate("startups", "name industry foundedYear");
 };
 
 const createUser = async (data) => {

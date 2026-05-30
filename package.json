@@ -26,6 +26,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "eslint": "^10.4.0",
     "nodemon": "^3.1.14",

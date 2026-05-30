@@ -45,12 +45,6 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
 
-    location: {
-      city: String,
-      province: String,
-      country: String,
-    },
-
     profilePicture: {
       type: String,
     },

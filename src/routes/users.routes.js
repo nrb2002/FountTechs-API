@@ -11,6 +11,8 @@ const validate = require("../middleware/validate");
 // Import ObjectId validator
 const validateObjectId = require("../middleware/validateObjectId");
 
+const userUpdateValidationRules = require("../validation/userUpdate.validation");
+
 // Import controller functions
 const {
   getAllUsers,
@@ -37,7 +39,7 @@ router.post("/", userValidationRules(), validate, createUser);
 router.put(
   "/:id",
   validateObjectId,
-  userValidationRules(),
+  userUpdateValidationRules(),
   validate,
   updateUser,
 );

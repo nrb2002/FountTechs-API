@@ -34,12 +34,35 @@ const startupSchema = new mongoose.Schema(
     },
 
     location: {
-      ward: String,
-      stake: String,
-      commune: String,
-      city: String,
-      province: String,
-      country: String,
+      ward: {
+        type: String,
+        trim: true,
+      },
+      stake: {
+        type: String,
+        trim: true,
+      },
+      commune: {
+        type: String,
+        trim: true,
+      },
+      city: {
+        type: String,
+        trim: true,
+      },
+      province: {
+        type: String,
+        trim: true,
+      },
+      country: {
+        type: String,
+        trim: true,
+      },
+    },
+
+    phone: {
+      type: String,
+      required: true,
     },
 
     phone: {
