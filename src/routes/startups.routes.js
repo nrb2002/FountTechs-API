@@ -2,14 +2,12 @@
 const express = require("express");
 const router = express.Router();
 
-// Import validation rules
-const startupValidationRules = require("../validation/startup.validation");
-
-// Import validation middleware
-const validate = require("../middleware/validate");
-
-// Import ObjectId validator
-const validateObjectId = require("../middleware/validateObjectId");
+// Import validation and middleware
+const startupValidationRules = require("../validation/startup.validation"); // Import validation rules
+const validate = require("../middleware/validate"); // Import validation middleware
+const validateObjectId = require("../middleware/validateObjectId"); // Import ObjectId validator
+const authenticate = require("../middleware/authenticate"); // Import authentication middleware
+const authorize = require("../middleware/authorize"); // Import authorization middleware
 
 // Import controller functions
 const {
@@ -21,7 +19,7 @@ const {
 } = require("../controllers/startups.controller");
 
 /* =========================
-   STARTUP ROUTES
+   PUBLIC ROUTES
 ========================= */
 
 // GET all startups
@@ -30,12 +28,25 @@ router.get("/", getAllStartups);
 // GET single startup
 router.get("/:id", validateObjectId, getSingleStartup);
 
+/* =========================
+   PROTECTED ROUTES
+========================= */
+
 // CREATE startup
-router.post("/", startupValidationRules(), validate, createStartup);
+router.post(
+  "/",
+  authenticate,
+  authorize("admin", "founder"),
+  startupValidationRules(),
+  validate,
+  createStartup,
+);
 
 // UPDATE startup
 router.put(
   "/:id",
+  authenticate,
+  authorize("admin", "founder"),
   validateObjectId,
   startupValidationRules(),
   validate,
@@ -43,6 +54,12 @@ router.put(
 );
 
 // DELETE startup
-router.delete("/:id", validateObjectId, deleteStartup);
+router.delete(
+  "/:id",
+  authenticate,
+  authorize("admin"),
+  validateObjectId,
+  deleteStartup,
+);
 
 module.exports = router;

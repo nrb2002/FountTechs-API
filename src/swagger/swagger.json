@@ -7,11 +7,20 @@
     "author": "Baron T.",
     "last update": "2026-05-22"
   },
-  "host": "founttech-api.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter JWT token as: Bearer <token>"
+    }
+  },
   "paths": {
     "/startups/": {
       "get": {
@@ -33,6 +42,11 @@
         "summary": "Create a new startup",
         "description": "Insert new startup in the database. ",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -110,7 +124,12 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/startups/{id}": {
@@ -154,6 +173,11 @@
             "required": true,
             "type": "string",
             "description": "Startup ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "body",
@@ -277,7 +301,12 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -292,6 +321,11 @@
             "required": true,
             "type": "string",
             "description": "startup ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -301,22 +335,25 @@
           "400": {
             "description": "Bad Request"
           }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/login": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
         }
       }
     },
     "/users/": {
-      "get": {
-        "tags": [
-          "Users Endpoints"
-        ],
-        "summary": "Get all users",
-        "description": "Retrieve all users from the database.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "post": {
         "tags": [
           "Users Endpoints"
@@ -359,48 +396,6 @@
                 "phone": {
                   "type": "string",
                   "example": "+243810000000"
-                },
-                "location": {
-                  "type": "object",
-                  "properties": {
-                    "city": {
-                      "type": "string",
-                      "example": "Kinshasa"
-                    },
-                    "province": {
-                      "type": "string",
-                      "example": "Kinshasa"
-                    },
-                    "country": {
-                      "type": "string",
-                      "example": "DR Congo"
-                    }
-                  }
-                },
-                "profilePicture": {
-                  "type": "string",
-                  "example": "https://example.com/profile.jpg"
-                },
-                "bio": {
-                  "type": "string",
-                  "example": "Startup founder and software developer."
-                },
-                "isVerified": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "isActive": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "startups": {
-                  "type": "array",
-                  "example": [
-                    "6650e7f97dbe9e00124a9abc"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
                 }
               }
             }
@@ -414,6 +409,30 @@
             "description": "Bad Request"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Users Endpoints"
+        ],
+        "summary": "Get all users",
+        "description": "Retrieve all users from the database.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/users/{id}": {
@@ -430,6 +449,11 @@
             "required": true,
             "type": "string",
             "description": "User ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -442,7 +466,12 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -457,6 +486,11 @@
             "required": true,
             "type": "string",
             "description": "User ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "body",
@@ -550,7 +584,12 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -565,6 +604,11 @@
             "required": true,
             "type": "string",
             "description": "User ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -577,7 +621,12 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     }
   }

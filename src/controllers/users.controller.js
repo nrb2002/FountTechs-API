@@ -1,8 +1,53 @@
-const usersService = require("../services/users.service");
+//Import dependencies
+const jwt = require("jsonwebtoken"); //JWT for authentication
+
+const usersService = require("../services/users.service"); //Import the users service
+const bcrypt = require("bcrypt"); //For password hashing
+
+//USER LOGIN
+const loginUser = async (req, res, next) => {
+  //#swagger.tags=["Login"]
+  //#swagger.summary="Sign in"
+  //#swagger.description="Insert your email and password to log in and receive a JWT token for authenticated requests."
+
+  /* #swagger.parameters["body"] = {
+      in: "body",
+      description: "User Login Data",
+      required: true,
+      schema: {
+        email: "baron@founttech.com",
+        password: "123456"
+      }
+  } */
+  try {
+    const user = await usersService.loginUser(
+      req.body.email,
+      req.body.password,
+    );
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" },
+    );
+
+    res.status(200).json({
+      success: true,
+      token,
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 // GET all users
 const getAllUsers = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
+  // #swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Get all users"
   //#swagger.description="Retrieve all users from the database."
 
@@ -18,6 +63,7 @@ const getAllUsers = async (req, res, next) => {
 // GET single user
 const getSingleUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
+  // #swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Get single user"
   //#swagger.description="Retrieve one user by ID."
 
@@ -60,23 +106,20 @@ const createUser = async (req, res, next) => {
         email: "baron@founttech.com",
         password: "123456",
         role: "Founder",
-        phone: "+243810000000",
-
-        profilePicture: "https://example.com/profile.jpg",
-        bio: "Startup founder and software developer.",
-
-        isVerified: false,
-
-        isActive: true,
-
-        startups: [
-          "6650e7f97dbe9e00124a9abc"
-        ]
+        phone: "+243810000000"
       }
   } */
 
   try {
-    const newUser = await usersService.createUser(req.body);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    // Create user data object with hashed password
+    const userData = {
+      ...req.body,
+      password: hashedPassword,
+    };
+
+    const newUser = await usersService.createUser(userData);
     const user = await usersService.getSingleUser(newUser._id);
 
     res.status(201).json(user);
@@ -88,6 +131,7 @@ const createUser = async (req, res, next) => {
 // UPDATE user
 const updateUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
+  // #swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Update user information"
   //#swagger.description="Edit a specific user and save updates in the database."
 
@@ -149,6 +193,7 @@ const updateUser = async (req, res, next) => {
 // DELETE user
 const deleteUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
+  // #swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Delete user"
   //#swagger.description="Delete a selected user from the database."
 
@@ -177,6 +222,7 @@ const deleteUser = async (req, res, next) => {
 };
 
 module.exports = {
+  loginUser,
   getAllUsers,
   getSingleUser,
   createUser,

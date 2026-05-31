@@ -1,4 +1,27 @@
+const bcrypt = require("bcrypt"); //bcrypt for password hashing
 const User = require("../models/users.model");
+
+const loginUser = async (email, password) => {
+  const user = await User.findOne({ email }).select("+password");
+
+  if (!user) {
+    const error = new Error();
+    error.statusCode = 401;
+    error.type = "INVALID_CREDENTIALS";
+    throw error;
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+
+  if (!passwordMatch) {
+    const error = new Error();
+    error.statusCode = 401;
+    error.type = "INVALID_CREDENTIALS";
+    throw error;
+  }
+
+  return user;
+};
 
 const getAllUsers = async () => {
   return await User.find()
@@ -33,4 +56,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  loginUser,
 };

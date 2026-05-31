@@ -2,19 +2,17 @@
 const express = require("express");
 const router = express.Router();
 
-// Import validation rules
-const userValidationRules = require("../validation/user.validation");
-
-// Import validation middleware
-const validate = require("../middleware/validate");
-
-// Import ObjectId validator
-const validateObjectId = require("../middleware/validateObjectId");
-
-const userUpdateValidationRules = require("../validation/userUpdate.validation");
+// Import validation and middleware
+const userValidationRules = require("../validation/user.validation"); // Import validation rules
+const validate = require("../middleware/validate"); // Import validation middleware
+const validateObjectId = require("../middleware/validateObjectId"); // Import ObjectId validator
+const userUpdateValidationRules = require("../validation/userUpdate.validation"); // Import validation rules for updates
+const authenticate = require("../middleware/authenticate"); // Import authentication middleware
+const authorize = require("../middleware/authorize"); // Import authorization middleware
 
 // Import controller functions
 const {
+  loginUser,
   getAllUsers,
   getSingleUser,
   createUser,
@@ -23,21 +21,29 @@ const {
 } = require("../controllers/users.controller");
 
 /* =========================
-   USER ROUTES
+   PUBLIC ROUTES
 ========================= */
 
-// GET all users
-router.get("/", getAllUsers);
-
-// GET single user
-router.get("/:id", validateObjectId, getSingleUser);
+//Login
+router.post("/login", loginUser);
 
 // CREATE user
 router.post("/", userValidationRules(), validate, createUser);
 
+/* =========================
+   PROTECTED ROUTES
+========================= */
+
+// GET all users
+router.get("/", authenticate, authorize("admin"), getAllUsers);
+
+// GET single user
+router.get("/:id", authenticate, validateObjectId, getSingleUser);
+
 // UPDATE user
 router.put(
   "/:id",
+  authenticate,
   validateObjectId,
   userUpdateValidationRules(),
   validate,
@@ -45,6 +51,6 @@ router.put(
 );
 
 // DELETE user
-router.delete("/:id", validateObjectId, deleteUser);
+router.delete("/:id", authenticate, validateObjectId, deleteUser);
 
 module.exports = router;

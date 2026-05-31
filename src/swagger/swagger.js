@@ -26,6 +26,15 @@ const doc = {
   //For local testing
   // host: 'localhost:8080',
   // schemes: ['http']
+
+  securityDefinitions: {
+    BearerAuth: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
+      description: "Enter JWT token as: Bearer <token>",
+    },
+  },
 };
 
 const outputFile = "./swagger.json";

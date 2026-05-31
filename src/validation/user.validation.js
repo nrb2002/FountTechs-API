@@ -28,7 +28,7 @@ const userValidationRules = () => {
       .isIn(["Founder", "Investor", "Developer", "Admin"])
       .withMessage("Invalid role"),
 
-    body("phone").optional().isString().withMessage("Phone must be a string"),
+    body("phone").notEmpty().isString().withMessage("Phone must be a string"),
 
     body("profilePicture")
       .optional()

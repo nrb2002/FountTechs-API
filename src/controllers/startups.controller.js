@@ -47,6 +47,7 @@ const getSingleStartup = async (req, res, next) => {
 const createStartup = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
   //#swagger.tags=["Post Endpoint"]
+  // #swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Create a new startup"
   //#swagger.description="Insert new startup in the database. "
   /* #swagger.parameters["body"] = {
@@ -82,6 +83,7 @@ const createStartup = async (req, res, next) => {
 const updateStartup = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
   //#swagger.tags=["Put Endpoint"]
+  // #swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Update startup info"
   //#swagger.description="Edit a specific startup and save update in database. "
   /* #swagger.parameters['id'] = {
@@ -143,6 +145,7 @@ const updateStartup = async (req, res, next) => {
 const deleteStartup = async (req, res, next) => {
   //#swagger.tags=["Startups Endpoints"]
   //#swagger.tags=["Delete Endpoints"]
+  // #swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Delete startup"
   //#swagger.description="Delete selected startup from the database."
 

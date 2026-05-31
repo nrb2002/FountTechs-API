@@ -33,6 +33,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       select: false,
+      minlength: 6,
+      trim: true,
     },
 
     role: {
@@ -43,6 +45,8 @@ const userSchema = new mongoose.Schema(
 
     phone: {
       type: String,
+      required: true,
+      trim: true,
     },
 
     profilePicture: {
