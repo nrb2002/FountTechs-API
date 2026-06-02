@@ -9,7 +9,6 @@ const loginUser = async (req, res, next) => {
   //#swagger.tags=["Login"]
   //#swagger.summary="Sign in"
   //#swagger.description="Insert your email and password to log in and receive a JWT token for authenticated requests."
-
   /* #swagger.parameters["body"] = {
       in: "body",
       description: "User Login Data",

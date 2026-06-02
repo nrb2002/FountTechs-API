@@ -7,9 +7,10 @@
     "author": "Baron T.",
     "last update": "2026-05-22"
   },
-  "host": "founttech-api.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "securityDefinitions": {
@@ -344,10 +345,35 @@
     },
     "/users/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Login"
+        ],
+        "summary": "Sign in",
+        "description": "Insert your email and password to log in and receive a JWT token for authenticated requests.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User Login Data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "baron@founttech.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       }

@@ -36,7 +36,7 @@ router.get("/:id", validateObjectId, getSingleStartup);
 router.post(
   "/",
   authenticate,
-  authorize("admin", "founder"),
+  authorize("Admin", "Founder"),
   startupValidationRules(),
   validate,
   createStartup,
@@ -46,7 +46,7 @@ router.post(
 router.put(
   "/:id",
   authenticate,
-  authorize("admin", "founder"),
+  authorize("Admin", "Founder"),
   validateObjectId,
   startupValidationRules(),
   validate,
@@ -57,7 +57,7 @@ router.put(
 router.delete(
   "/:id",
   authenticate,
-  authorize("admin"),
+  authorize("Admin"),
   validateObjectId,
   deleteStartup,
 );

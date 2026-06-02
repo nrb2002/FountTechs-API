@@ -3,12 +3,14 @@ const express = require("express");
 const router = express.Router();
 
 // Import validation and middleware
-const userValidationRules = require("../validation/user.validation"); // Import validation rules
-const validate = require("../middleware/validate"); // Import validation middleware
-const validateObjectId = require("../middleware/validateObjectId"); // Import ObjectId validator
-const userUpdateValidationRules = require("../validation/userUpdate.validation"); // Import validation rules for updates
-const authenticate = require("../middleware/authenticate"); // Import authentication middleware
-const authorize = require("../middleware/authorize"); // Import authorization middleware
+const userValidationRules = require("../validation/user.validation");
+const userUpdateValidationRules = require("../validation/userUpdate.validation");
+
+const validate = require("../middleware/validate");
+const validateObjectId = require("../middleware/validateObjectId");
+
+const authenticate = require("../middleware/authenticate");
+const authorize = require("../middleware/authorize");
 
 // Import controller functions
 const {
@@ -24,23 +26,23 @@ const {
    PUBLIC ROUTES
 ========================= */
 
-//Login
+// Login
 router.post("/login", loginUser);
 
-// CREATE user
+// Register User
 router.post("/", userValidationRules(), validate, createUser);
 
 /* =========================
    PROTECTED ROUTES
 ========================= */
 
-// GET all users
-router.get("/", authenticate, authorize("admin"), getAllUsers);
+// Admin only
+router.get("/", authenticate, authorize("Admin"), getAllUsers);
 
-// GET single user
+// Any authenticated user
 router.get("/:id", authenticate, validateObjectId, getSingleUser);
 
-// UPDATE user
+// Any authenticated user
 router.put(
   "/:id",
   authenticate,
@@ -50,7 +52,7 @@ router.put(
   updateUser,
 );
 
-// DELETE user
+// Any authenticated user
 router.delete("/:id", authenticate, validateObjectId, deleteUser);
 
 module.exports = router;
