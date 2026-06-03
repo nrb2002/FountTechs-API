@@ -41,7 +41,7 @@ const errorHandler = (err, req, res, next) => {
   if (err.type === "MISSING_TOKEN" || err.type === "UNAUTHENTICATED") {
     return res.status(401).json({
       success: false,
-      message: "Authentication required",
+      message: "Authentication required!",
     });
   }
 
@@ -51,7 +51,7 @@ const errorHandler = (err, req, res, next) => {
   if (err.type === "FORBIDDEN") {
     return res.status(403).json({
       success: false,
-      message: "You are not authorized to perform this action",
+      message: "You are not authorized to perform this action!",
     });
   }
 
