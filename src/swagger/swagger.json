@@ -7,11 +7,10 @@
     "author": "Baron T.",
     "last update": "2026-06-03"
   },
-  "host": "localhost:8080",
+  "host": "founttech-api.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "securityDefinitions": {
     "BearerAuth": {
