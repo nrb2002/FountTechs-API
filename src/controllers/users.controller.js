@@ -1,19 +1,20 @@
 //Import dependencies
-const jwt = require("jsonwebtoken"); //JWT for authentication
 const usersService = require("../services/users.service"); //Import the users service
 const bcrypt = require("bcrypt"); //For password hashing
+const jwt = require("jsonwebtoken"); //JWT for authentication
+
 
 //USER LOGIN
 const loginUser = async (req, res, next) => {
-  //#swagger.tags=["Login"]
+  //#swagger.tags=["Authentication"]
   //#swagger.summary="Sign in"
   //#swagger.description="Insert your email and password to log in and receive a JWT token for authenticated requests."
-  /* #swagger.parameters["body"] = {
+  /*#swagger.parameters["body"] = {
       in: "body",
       description: "User Login Data",
       required: true,
       schema: {
-        email: "baron@founttech.com",
+        email: "baron@congoempire.org",
         password: "123456"
       }
   } */
@@ -42,6 +43,30 @@ const loginUser = async (req, res, next) => {
   }
 };
 
+//USER LOGOUT
+const logoutUser = async (req, res, next) => {
+  //#swagger.tags=["Logout"]
+  //#swagger.summary="Sign out"
+  //#swagger.description="Sign out from your account and end the current session."
+  try {
+    const user = await function(req, res, next) {
+      req.logout((err) => {
+        if (err) {
+          return next(err);
+        }
+
+        req.session.destroy(() => {
+          res.redirect("/");
+        });
+      });
+    };
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 // GET all users
 const getAllUsers = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
@@ -58,14 +83,14 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-// GET single user
-const getSingleUser = async (req, res, next) => {
+// GET user profile
+const getUserProfile = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
   //#swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Get single user (Authenticated users)"
+  //#swagger.summary="Get user profile (Authenticated users)"
   //#swagger.description="Retrieve one user by ID."
 
-  /* #swagger.parameters['id'] = {
+  /*#swagger.parameters['id'] = {
         in: 'path',
         description: 'User ID',
         required: true,
@@ -73,7 +98,7 @@ const getSingleUser = async (req, res, next) => {
   } */
 
   try {
-    const user = await usersService.getSingleUser(req.params.id);
+    const user = await usersService.getUserProfile(req.params.id);
 
     if (!user) {
       return res.status(404).json({
@@ -92,7 +117,7 @@ const createUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
   //#swagger.summary="Create a new user"
   //#swagger.description="Insert a new user into the database."
-  /* #swagger.parameters["body"] = {
+  /*#swagger.parameters["body"] = {
       in: "body",
       description: "New user data",
       required: true,
@@ -117,7 +142,7 @@ const createUser = async (req, res, next) => {
     };
 
     const newUser = await usersService.createUser(userData);
-    const user = await usersService.getSingleUser(newUser._id);
+    const user = await usersService.getUserProfile(newUser._id);
 
     res.status(201).json(user);
   } catch (error) {
@@ -131,14 +156,14 @@ const updateUser = async (req, res, next) => {
   //#swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Update user information (Authenticated users)"
   //#swagger.description="Edit a specific user and save updates in the database."
-  /* #swagger.parameters['id'] = {
+  /*#swagger.parameters['id'] = {
         in: 'path',
         description: 'User ID',
         required: true,
         type: 'string'
   } */
 
-  /* #swagger.parameters["body"] = {
+  /*#swagger.parameters["body"] = {
       in: "body",
       description: "Updated user data",
       required: true,
@@ -205,7 +230,7 @@ const deleteUser = async (req, res, next) => {
   //#swagger.summary="Delete user (Authenticated users)"
   //#swagger.description="Delete a selected user from the database."
 
-  /* #swagger.parameters['id'] = {
+  /*#swagger.parameters['id'] = {
         in: 'path',
         description: 'User ID',
         required: true,
@@ -229,10 +254,13 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+
+
 module.exports = {
   loginUser,
+  logoutUser,
+  getUserProfile,
   getAllUsers,
-  getSingleUser,
   createUser,
   updateUser,
   deleteUser,

@@ -15,8 +15,9 @@ const authorize = require("../middleware/authorize");
 // Import controller functions
 const {
   loginUser,
+  logoutUser,
+  getUserProfile,
   getAllUsers,
-  getSingleUser,
   createUser,
   updateUser,
   deleteUser,
@@ -39,8 +40,8 @@ router.post("/", userValidationRules(), validate, createUser);
 // Admin only
 router.get("/", authenticate, authorize("Admin"), getAllUsers);
 
-// Any authenticated user
-router.get("/:id", authenticate, validateObjectId, getSingleUser);
+// Get user profile
+router.get("/:id", authenticate, validateObjectId, getUserProfile);
 
 // Any authenticated user
 router.put(
@@ -50,6 +51,12 @@ router.put(
   userUpdateValidationRules(),
   validate,
   updateUser,
+);
+
+// Logout
+router.get("/logout", 
+  //authenticate,
+  logoutUser,
 );
 
 // Any authenticated user

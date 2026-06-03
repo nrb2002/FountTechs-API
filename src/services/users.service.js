@@ -34,13 +34,31 @@ const loginUser = async (email, password) => {
   };
 };
 
+const logoutUser = async (req) => {
+  return new Promise((resolve, reject) => {
+    req.logout((err) => {
+      if (err) {
+        return reject(err);
+      }
+
+      req.session.destroy((sessionError) => {
+        if (sessionError) {
+          return reject(sessionError);
+        }
+
+        resolve();
+      });
+    });
+  });
+};
+
 const getAllUsers = async () => {
   return await User.find()
     .select("-password")
     .populate("startups", "name industry foundedYear");
 };
 
-const getSingleUser = async (id) => {
+const getUserProfile = async (id) => {
   return await User.findById(id)
     .select("-password")
     .populate("startups", "name industry foundedYear");
@@ -63,9 +81,10 @@ const deleteUser = async (id) => {
 
 module.exports = {
   getAllUsers,
-  getSingleUser,
+  getUserProfile,
   createUser,
   updateUser,
   deleteUser,
   loginUser,
+  logoutUser,
 };

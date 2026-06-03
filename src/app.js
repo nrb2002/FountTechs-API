@@ -92,11 +92,13 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Homepage
 app.use("/", defaultRoute);
 
+// Users API
+app.use("/users", usersRoutes);
+
 // Startups API
 app.use("/startups", startupsRoutes);
 
-// Users API
-app.use("/users", usersRoutes);
+
 
 // Swagger Docs
 app.use("/api-docs", swaggerRoutes);
@@ -125,31 +127,6 @@ app.get(
     res.redirect("/");
   },
 );
-
-// Logout
-app.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-
-    req.session.destroy(() => {
-      res.redirect("/");
-    });
-  });
-});
-
-// Current logged-in user
-app.get("/profile", (req, res) => {
-  if (!req.user) {
-    return res.status(401).json({
-      success: false,
-      message: "Not authenticated",
-    });
-  }
-
-  res.status(200).json(req.user);
-});
 
 /* =========================
    HEALTH CHECK
