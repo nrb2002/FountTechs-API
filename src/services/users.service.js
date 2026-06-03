@@ -72,7 +72,7 @@ const updateUser = async (id, data) => {
   return await User.findByIdAndUpdate(id, data, {
     new: true,
     runValidators: true,
-  });
+  }).select("-password");
 };
 
 const deleteUser = async (id) => {

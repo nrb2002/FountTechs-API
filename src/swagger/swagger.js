@@ -21,7 +21,7 @@ const doc = {
     process.env.NODE_ENV === "production"
       ? "founttech-api.onrender.com"
       : "localhost:8080",
-  schemes: ["http", "https"],
+  schemes: ["https", "http"],
 
   //For local testing
   // host: 'localhost:8080',
@@ -32,7 +32,7 @@ const doc = {
       type: "apiKey",
       name: "Authorization",
       in: "header",
-      description: "Enter JWT token as: 'Bearer' + token",
+      description: "Enter JWT token as: Bearer <your_token>",
     },
   },
 };

@@ -18,6 +18,20 @@ const loginUser = async (req, res, next) => {
         password: "123456"
       }
   } */
+  /* #swagger.responses[200] = {
+      description: "Login successful",
+      schema: {
+        success: true,
+        token: "eyJhbGciOiJIUzI1NiIs...",
+        user: {
+          _id: "684...",
+          firstName: "Baron",
+          lastName: "Mobs",
+          email: "baron@congoempire.org",
+          role: "Admin"
+        }
+      }
+  } */
   try {
     const user = await usersService.loginUser(
       req.body.email,
@@ -43,24 +57,26 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-//USER LOGOUT
+// USER LOGOUT
 const logoutUser = async (req, res, next) => {
-  //#swagger.tags=["Logout"]
+  //#swagger.tags=["Authentication"]
+  //#swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Sign out"
-  //#swagger.description="Sign out from your account and end the current session."
-  try {
-    const user = await function(req, res, next) {
-      req.logout((err) => {
-        if (err) {
-          return next(err);
-        }
+  //#swagger.description="Sign out from your account."
 
-        req.session.destroy(() => {
-          res.redirect("/");
+  try {
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+
+      req.session.destroy(() => {
+        res.status(200).json({
+          success: true,
+          message: "Logged out successfully!",
         });
       });
-    };
-
+    });
   } catch (error) {
     next(error);
   }
@@ -84,24 +100,19 @@ const getAllUsers = async (req, res, next) => {
 };
 
 // GET user profile
+// GET USER PROFILE
 const getUserProfile = async (req, res, next) => {
-  //#swagger.tags=["Users Endpoints"]
+  //#swagger.tags=["Authentication"]
   //#swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Get user profile (Authenticated users)"
-  //#swagger.description="Retrieve one user by ID."
-
-  /*#swagger.parameters['id'] = {
-        in: 'path',
-        description: 'User ID',
-        required: true,
-        type: 'string'
-  } */
+  //#swagger.summary="Get current user profile"
+  //#swagger.description="Retrieve the profile of the authenticated user."
 
   try {
-    const user = await usersService.getUserProfile(req.params.id);
+    const user = await usersService.getUserProfile(req.user.id);
 
     if (!user) {
       return res.status(404).json({
+        success: false,
         message: "User not found!",
       });
     }

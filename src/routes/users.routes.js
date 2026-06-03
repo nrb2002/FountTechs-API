@@ -37,29 +37,12 @@ router.post("/", userValidationRules(), validate, createUser);
    PROTECTED ROUTES
 ========================= */
 
-// Admin only
+router.get("/logout", authenticate, logoutUser);
+router.get("/profile", authenticate, getUserProfile);
+
+
 router.get("/", authenticate, authorize("Admin"), getAllUsers);
-
-// Get user profile
-router.get("/:id", authenticate, validateObjectId, getUserProfile);
-
-// Any authenticated user
-router.put(
-  "/:id",
-  authenticate,
-  validateObjectId,
-  userUpdateValidationRules(),
-  validate,
-  updateUser,
-);
-
-// Logout
-router.get("/logout", 
-  //authenticate,
-  logoutUser,
-);
-
-// Any authenticated user
+router.put("/:id", authenticate, validateObjectId, userUpdateValidationRules(), validate, updateUser);
 router.delete("/:id", authenticate, validateObjectId, deleteUser);
 
 module.exports = router;

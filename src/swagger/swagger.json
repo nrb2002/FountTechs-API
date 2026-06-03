@@ -10,15 +10,15 @@
   "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "securityDefinitions": {
     "BearerAuth": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header",
-      "description": "Enter JWT token as: 'Bearer' + token"
+      "description": "Enter JWT token as: Bearer <your_token>"
     }
   },
   "paths": {
@@ -82,7 +82,48 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Login successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIs..."
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "684..."
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Baron"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Mobs"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "baron@congoempire.org"
+                    },
+                    "role": {
+                      "type": "string",
+                      "example": "Admin"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -169,21 +210,40 @@
         ]
       }
     },
-    "/users/{id}": {
+    "/users/logout": {
       "get": {
         "tags": [
-          "Users Endpoints"
+          "Authentication"
         ],
-        "summary": "Get user profile (Authenticated users)",
-        "description": "Retrieve one user by ID.",
+        "summary": "Sign out",
+        "description": "Sign out from your account.",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "User ID"
-          },
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get current user profile",
+        "description": "Retrieve the profile of the authenticated user.",
+        "parameters": [
           {
             "name": "authorization",
             "in": "header",
@@ -194,9 +254,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
           "404": {
             "description": "Not Found"
           }
@@ -206,7 +263,9 @@
             "BearerAuth": []
           }
         ]
-      },
+      }
+    },
+    "/users/{id}": {
       "put": {
         "tags": [
           "Users Endpoints"
@@ -361,20 +420,6 @@
             "BearerAuth": []
           }
         ]
-      }
-    },
-    "/users/logout": {
-      "get": {
-        "tags": [
-          "Logout"
-        ],
-        "summary": "Sign out",
-        "description": "Sign out from your account and end the current session.",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
       }
     },
     "/startups/": {
