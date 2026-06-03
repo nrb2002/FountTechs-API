@@ -102,7 +102,7 @@ app.use("/users", usersRoutes);
 app.use("/api-docs", swaggerRoutes);
 
 /* =========================
-   GITHUB AUTH ROUTES
+   GITHUB OAUTH ROUTES
 ========================= */
 
 // Start GitHub Login

@@ -1,6 +1,5 @@
 //Import dependencies
 const jwt = require("jsonwebtoken"); //JWT for authentication
-
 const usersService = require("../services/users.service"); //Import the users service
 const bcrypt = require("bcrypt"); //For password hashing
 
@@ -46,8 +45,8 @@ const loginUser = async (req, res, next) => {
 // GET all users
 const getAllUsers = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
-  // #swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Get all users"
+  //#swagger.security = [{"BearerAuth": []}]
+  //#swagger.summary="Get all users (Admins only)"
   //#swagger.description="Retrieve all users from the database."
 
   try {
@@ -62,8 +61,8 @@ const getAllUsers = async (req, res, next) => {
 // GET single user
 const getSingleUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
-  // #swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Get single user"
+  //#swagger.security = [{"BearerAuth": []}]
+  //#swagger.summary="Get single user (Authenticated users)"
   //#swagger.description="Retrieve one user by ID."
 
   /* #swagger.parameters['id'] = {
@@ -93,7 +92,6 @@ const createUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
   //#swagger.summary="Create a new user"
   //#swagger.description="Insert a new user into the database."
-
   /* #swagger.parameters["body"] = {
       in: "body",
       description: "New user data",
@@ -130,10 +128,9 @@ const createUser = async (req, res, next) => {
 // UPDATE user
 const updateUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
-  // #swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Update user information"
+  //#swagger.security = [{"BearerAuth": []}]
+  //#swagger.summary="Update user information (Authenticated users)"
   //#swagger.description="Edit a specific user and save updates in the database."
-
   /* #swagger.parameters['id'] = {
         in: 'path',
         description: 'User ID',
@@ -175,13 +172,25 @@ const updateUser = async (req, res, next) => {
   } */
 
   try {
-    const updatedUser = await usersService.updateUser(req.params.id, req.body);
+
+    if (req.body.password) {
+      req.body.password = await bcrypt.hash(req.body.password, 10);
+    }
+
+    const updatedUser = await usersService.updateUser(
+      req.params.id, 
+      req.body
+    );
 
     if (!updatedUser) {
       return res.status(404).json({
         message: "User not found!",
       });
     }
+
+    
+
+
 
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -192,8 +201,8 @@ const updateUser = async (req, res, next) => {
 // DELETE user
 const deleteUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
-  // #swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Delete user"
+  //#swagger.security = [{"BearerAuth": []}]
+  //#swagger.summary="Delete user (Authenticated users)"
   //#swagger.description="Delete a selected user from the database."
 
   /* #swagger.parameters['id'] = {

@@ -20,7 +20,18 @@ const loginUser = async (email, password) => {
     throw error;
   }
 
-  return user;
+  // Convert to plain object and remove password safely
+  const userObj = user.toObject();
+  delete userObj.password;
+
+  // Return safe user data (no password)
+  return {
+    _id: userObj._id,
+    firstName: userObj.firstName,
+    lastName: userObj.lastName,
+    email: userObj.email,
+    role: userObj.role,
+  };
 };
 
 const getAllUsers = async () => {
