@@ -61,7 +61,7 @@ const getAllUsers = async () => {
 const getUserProfile = async (id) => {
   return await User.findById(id)
     .select("-password")
-    .populate("startups", "name industry foundedYear");
+    .populate("startups", "name industry ward foundedYear");
 };
 
 const createUser = async (data) => {
