@@ -24,29 +24,13 @@
     }
   },
   "paths": {
-    "/auth/github": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/auth/github/callback": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/health": {
       "get": {
-        "description": "",
+        "tags": [
+          "API Health Check"
+        ],
+        "summary": "API Health Check",
+        "description": "Check the health status of the API.",
         "responses": {
           "200": {
             "description": "OK"
@@ -84,48 +68,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Login successful",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "token": {
-                  "type": "string",
-                  "example": "eyJhbGciOiJIUzI1NiIs..."
-                },
-                "user": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string",
-                      "example": "684..."
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "Baron"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "Mobs"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "baron@congoempire.org"
-                    },
-                    "role": {
-                      "type": "string",
-                      "example": "Admin"
-                    }
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -135,7 +78,7 @@
         "tags": [
           "Users Endpoints"
         ],
-        "summary": "Create a new user",
+        "summary": "Create a new user (Public endpoint)",
         "description": "Insert a new user into the database.",
         "parameters": [
           {
@@ -217,7 +160,7 @@
         "tags": [
           "Authentication"
         ],
-        "summary": "Sign out",
+        "summary": "Sign out (Must be logged in: Authentication + Authorization required)",
         "description": "Sign out from your account.",
         "parameters": [
           {
@@ -243,7 +186,7 @@
         "tags": [
           "Authentication"
         ],
-        "summary": "Get current user profile",
+        "summary": "Get user profile. (Must be logged in: Authentication + Authorization required)",
         "description": "Retrieve the profile of the authenticated user.",
         "parameters": [
           {
@@ -272,7 +215,7 @@
         "tags": [
           "Users Endpoints"
         ],
-        "summary": "Update user information (Authenticated users)",
+        "summary": "Update user information (Must be logged in: Authentication + Authorization required)",
         "description": "Edit a specific user and save updates in the database.",
         "parameters": [
           {
@@ -390,7 +333,7 @@
         "tags": [
           "Users Endpoints"
         ],
-        "summary": "Delete user (Authenticated users)",
+        "summary": "Delete user (Must be logged in: Authentication + Authorization required)",
         "description": "Delete a selected user from the database.",
         "parameters": [
           {

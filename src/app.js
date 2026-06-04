@@ -98,8 +98,6 @@ app.use("/users", usersRoutes);
 // Startups API
 app.use("/startups", startupsRoutes);
 
-
-
 // Swagger Docs
 app.use("/api-docs", swaggerRoutes);
 
@@ -108,7 +106,9 @@ app.use("/api-docs", swaggerRoutes);
 ========================= */
 
 // Start GitHub Login
+
 app.get(
+  //#swagger.ignore = true
   "/auth/github",
   passport.authenticate("github", {
     scope: ["user:email"],
@@ -116,7 +116,9 @@ app.get(
 );
 
 // GitHub Callback
+
 app.get(
+  //#swagger.ignore = true
   "/auth/github/callback",
   passport.authenticate("github", {
     failureRedirect: "/api-docs",
@@ -132,18 +134,16 @@ app.get(
    HEALTH CHECK
 ========================= */
 
-app.get("/health", (req, res) => {
-  res.status(200).json({
-    status: "online",
-    uptime: process.uptime(),
+app.get(
+  //#swagger.tags=["API Health Check"]
+  //#swagger.summary="API Health Check"
+  //#swagger.description="Check the health status of the API."
+  "/health", (req, res) => {
+    res.status(200).json({
+      status: "online",
+      uptime: process.uptime(),
+    });
   });
-});
-
-
-
-
-
-
 
 /* =========================
    ERROR HANDLER

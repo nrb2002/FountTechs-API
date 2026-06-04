@@ -40,9 +40,15 @@ router.post("/", userValidationRules(), validate, createUser);
 router.get("/logout", authenticate, logoutUser);
 router.get("/profile", authenticate, getUserProfile);
 
-
 router.get("/", authenticate, authorize("Admin"), getAllUsers);
-router.put("/:id", authenticate, validateObjectId, userUpdateValidationRules(), validate, updateUser);
+router.put(
+  "/:id",
+  authenticate,
+  validateObjectId,
+  userUpdateValidationRules(),
+  validate,
+  updateUser,
+);
 router.delete("/:id", authenticate, validateObjectId, deleteUser);
 
 module.exports = router;

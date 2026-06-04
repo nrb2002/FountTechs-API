@@ -3,7 +3,6 @@ const usersService = require("../services/users.service"); //Import the users se
 const bcrypt = require("bcrypt"); //For password hashing
 const jwt = require("jsonwebtoken"); //JWT for authentication
 
-
 //USER LOGIN
 const loginUser = async (req, res, next) => {
   //#swagger.tags=["Authentication"]
@@ -16,20 +15,6 @@ const loginUser = async (req, res, next) => {
       schema: {
         email: "baron@congoempire.org",
         password: "123456"
-      }
-  } */
-  /* #swagger.responses[200] = {
-      description: "Login successful",
-      schema: {
-        success: true,
-        token: "eyJhbGciOiJIUzI1NiIs...",
-        user: {
-          _id: "684...",
-          firstName: "Baron",
-          lastName: "Mobs",
-          email: "baron@congoempire.org",
-          role: "Admin"
-        }
       }
   } */
   try {
@@ -61,7 +46,7 @@ const loginUser = async (req, res, next) => {
 const logoutUser = async (req, res, next) => {
   //#swagger.tags=["Authentication"]
   //#swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Sign out"
+  //#swagger.summary="Sign out (Must be logged in: Authentication + Authorization required)"
   //#swagger.description="Sign out from your account."
 
   try {
@@ -82,10 +67,10 @@ const logoutUser = async (req, res, next) => {
   }
 };
 
-
 // GET all users
 const getAllUsers = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
+  //#swagger.tags=["Protected Access"]
   //#swagger.security = [{"BearerAuth": []}]
   //#swagger.summary="Get all users (Admins only)"
   //#swagger.description="Retrieve all users from the database."
@@ -99,12 +84,11 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-// GET user profile
 // GET USER PROFILE
 const getUserProfile = async (req, res, next) => {
   //#swagger.tags=["Authentication"]
   //#swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Get current user profile"
+  //#swagger.summary="Get user profile. (Must be logged in: Authentication + Authorization required)"
   //#swagger.description="Retrieve the profile of the authenticated user."
 
   try {
@@ -126,7 +110,8 @@ const getUserProfile = async (req, res, next) => {
 // CREATE user
 const createUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
-  //#swagger.summary="Create a new user"
+  //#swagger.tags=["Public"]
+  //#swagger.summary="Create a new user (Public endpoint)"
   //#swagger.description="Insert a new user into the database."
   /*#swagger.parameters["body"] = {
       in: "body",
@@ -164,8 +149,9 @@ const createUser = async (req, res, next) => {
 // UPDATE user
 const updateUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
+  //#swagger.tags=["Protected Access"]
   //#swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Update user information (Authenticated users)"
+  //#swagger.summary="Update user information (Must be logged in: Authentication + Authorization required)"
   //#swagger.description="Edit a specific user and save updates in the database."
   /*#swagger.parameters['id'] = {
         in: 'path',
@@ -208,25 +194,17 @@ const updateUser = async (req, res, next) => {
   } */
 
   try {
-
     if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 10);
     }
 
-    const updatedUser = await usersService.updateUser(
-      req.params.id, 
-      req.body
-    );
+    const updatedUser = await usersService.updateUser(req.params.id, req.body);
 
     if (!updatedUser) {
       return res.status(404).json({
         message: "User not found!",
       });
     }
-
-    
-
-
 
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -237,8 +215,9 @@ const updateUser = async (req, res, next) => {
 // DELETE user
 const deleteUser = async (req, res, next) => {
   //#swagger.tags=["Users Endpoints"]
+  //#swagger.tags=["Protected Access"]
   //#swagger.security = [{"BearerAuth": []}]
-  //#swagger.summary="Delete user (Authenticated users)"
+  //#swagger.summary="Delete user (Must be logged in: Authentication + Authorization required)"
   //#swagger.description="Delete a selected user from the database."
 
   /*#swagger.parameters['id'] = {
@@ -264,8 +243,6 @@ const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 module.exports = {
   loginUser,
