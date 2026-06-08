@@ -23,10 +23,10 @@ const {
 ========================= */
 
 // GET all startups
-router.get("/", getAllStartups);
+router.get("/", authenticate, getAllStartups);
 
 // GET single startup
-router.get("/:id", validateObjectId, getSingleStartup);
+router.get("/:id", authenticate, validateObjectId, getSingleStartup);
 
 /* =========================
    PROTECTED ROUTES
